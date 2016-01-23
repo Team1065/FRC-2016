@@ -10,7 +10,7 @@ public class RobotMap {
     public static int MOOSE_MOTOR_UPDATE_TIME = 10;
     
     //Double Constants
-    public static double DRIVE_TOP_SPEED = 12.0,// feet per second TODO: change
+    public static double DRIVE_TOP_SPEED = 140.0,// inches per second TODO: change
     					 DRIVE_WHEEL_DIAMETER = 7.65,
     					 DRIVE_ENCODERS_COUNTS_PER_REV = 360;
     
