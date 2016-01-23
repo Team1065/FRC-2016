@@ -1,6 +1,7 @@
 package org.usfirst.frc.team1065.robot.subsystems;
 
 import org.usfirst.frc.team1065.robot.RobotMap;
+import org.usfirst.frc.team1065.robot.commands.DriveWithJoysticks;
 
 import edu.wpi.first.wpilibj.CounterBase;
 import edu.wpi.first.wpilibj.Encoder;
@@ -14,6 +15,7 @@ import edu.wpi.first.wpilibj.livewindow.LiveWindow;
  */
 public class DriveTrain extends Subsystem {
 	private Talon leftTalon, rightTalon;
+	//distance and rotate will be done in command
 	//straight pid(angle)= setL&R(speed-pidGet, speed+pidGet), rates straight to motors
     private PIDController straightPID, leftRatePID, rightRatePID;
 	private Encoder leftEncoder, rightEncoder;
@@ -38,11 +40,10 @@ public class DriveTrain extends Subsystem {
     //setL&R, if encoderEnable LRate.setSetpoint(lspeed * MaxSpeed)...
     
     public void initDefaultCommand() {
-        // Set the default command for a subsystem here.
-        //setDefaultCommand(new MySpecialCommand());
+        setDefaultCommand(new DriveWithJoysticks());
     }
     
-    public void drive(double leftSpeed, double rightSpeed){
+    public void tankDrive(double leftSpeed, double rightSpeed){
     	leftTalon.set(leftSpeed);
     	rightTalon.set(rightSpeed);
     }

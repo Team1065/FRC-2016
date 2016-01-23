@@ -26,4 +26,9 @@ public class RobotMap {
     				  LEFT_DRIVE_ENCODER_PORT_B = 1,
 					  RIGHT_DRIVE_ENCODER_PORT_A = 2,
     				  RIGHT_DRIVE_ENCODER_PORT_B = 3;
+    
+    //OI
+    public static int LEFT_JOYSTICK_PORT = 0,
+					  RIGHT_JOYSTICK_PORT = 1,
+					  ENHANCED_DS_PORT = 2;
 }
