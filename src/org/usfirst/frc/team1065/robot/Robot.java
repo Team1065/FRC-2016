@@ -2,6 +2,7 @@
 package org.usfirst.frc.team1065.robot;
 
 import org.usfirst.frc.team1065.robot.subsystems.DriveTrain;
+import org.usfirst.frc.team1065.robot.subsystems.Intake;
 
 import edu.wpi.first.wpilibj.IterativeRobot;
 import edu.wpi.first.wpilibj.command.Command;
@@ -12,11 +13,13 @@ import edu.wpi.first.wpilibj.livewindow.LiveWindow;
 public class Robot extends IterativeRobot {
 
 	public static OI oi;
-	public static DriveTrain drive = new DriveTrain();
+	public static DriveTrain drive;
+	public static Intake intake;
 
     public void robotInit() {
 		oi = new OI();
 		drive = new DriveTrain();
+		intake = new Intake();
     }
 	
 	public void disabledPeriodic() {

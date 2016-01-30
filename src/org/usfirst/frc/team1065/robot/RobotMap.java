@@ -19,7 +19,8 @@ public class RobotMap {
     
     //PWM Ports
     public static int LEFT_DRIVE_MOTOR_PORT = 0,
-    				  RIGHT_DRIVE_MOTOR_PORT = 1;
+    				  RIGHT_DRIVE_MOTOR_PORT = 1,
+    				  INTAKE_MOTOR_PORT = 2;
     
     //Digital Ports
     public static int LEFT_DRIVE_ENCODER_PORT_A = 0,
@@ -30,5 +31,7 @@ public class RobotMap {
     //OI
     public static int LEFT_JOYSTICK_PORT = 0,
 					  RIGHT_JOYSTICK_PORT = 1,
-					  ENHANCED_DS_PORT = 2;
+					  ENHANCED_DS_PORT = 2,
+					  INTAKE_UP_PORT = 4,
+					  INTAKE_DOWN_PORT = 5;
 }

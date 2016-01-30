@@ -23,5 +23,13 @@ public class OI {
     public double getYAverage(){
         return ((-leftJoystick.getY()) + (-rightJoystick.getY()))/2.0;
     }
+    
+    public boolean getIntakeUpSwitch(){
+    	return enhancedDS.getRawButton(RobotMap.INTAKE_UP_PORT);
+    }
+    
+    public boolean getIntakeDownSwitch(){
+    	return enhancedDS.getRawButton(RobotMap.INTAKE_DOWN_PORT);
+    }
 }
 
