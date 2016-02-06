@@ -13,15 +13,29 @@ public class OI {
 	}
 	
 	public double getLeftJoystickY () {
-		return -leftJoystick.getY();
+		if(Math.abs(leftJoystick.getY()) < RobotMap.JOYSTICK_DEADBAND){
+			return 0;
+		}
+	    else {
+	    	return -leftJoystick.getY();
+	    }
 	}
 	
 	public double getRightJoystickY () {
-		return -rightJoystick.getY();
+		if(Math.abs(rightJoystick.getY()) < RobotMap.JOYSTICK_DEADBAND){
+			return 0;
+		}
+	    else {
+	    	return -rightJoystick.getY();
+	    }
 	}
     
     public double getYAverage(){
-        return ((-leftJoystick.getY()) + (-rightJoystick.getY()))/2.0;
+        return (getLeftJoystickY () + getRightJoystickY ())/2.0;
+    }
+    
+    public boolean getRightJoystickTrigger(){
+    	return rightJoystick.getTrigger();
     }
     
     public boolean getIntakeUpSwitch(){

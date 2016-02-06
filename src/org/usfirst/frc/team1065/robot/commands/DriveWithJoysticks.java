@@ -1,6 +1,7 @@
 package org.usfirst.frc.team1065.robot.commands;
 
 import org.usfirst.frc.team1065.robot.Robot;
+import org.usfirst.frc.team1065.robot.RobotMap;
 
 import edu.wpi.first.wpilibj.command.Command;
 
@@ -17,7 +18,20 @@ public class DriveWithJoysticks extends Command {
     }
 
     protected void execute() {
-    	Robot.drive.tankDrive(Robot.oi.getLeftJoystickY(), Robot.oi.getRightJoystickY());
+    	double leftY = Robot.oi.getLeftJoystickY();
+    	double rightY = Robot.oi.getRightJoystickY();
+    	double averageY = Robot.oi.getYAverage();
+    	
+    	double joystickDiff = Math.abs(leftY-rightY);
+    	
+    	if((leftY * rightY >= 0) && joystickDiff < (Math.abs(averageY) * RobotMap.DRIVE_STRAIGHT_BAND_PERCENTAGE))
+        {
+        	Robot.drive.tankDrive(averageY, averageY);
+        }
+        else
+        {
+        	Robot.drive.tankDrive(leftY, rightY);
+        }
     }
 
     protected boolean isFinished() {
