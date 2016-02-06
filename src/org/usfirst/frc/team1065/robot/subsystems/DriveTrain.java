@@ -3,10 +3,13 @@ package org.usfirst.frc.team1065.robot.subsystems;
 import org.usfirst.frc.team1065.robot.RobotMap;
 import org.usfirst.frc.team1065.robot.commands.DriveWithJoysticks;
 
+import com.kauailabs.navx.frc.AHRS;
+
 import edu.wpi.first.wpilibj.CounterBase;
 import edu.wpi.first.wpilibj.Encoder;
 import edu.wpi.first.wpilibj.PIDController;
 import edu.wpi.first.wpilibj.PIDSourceType;
+import edu.wpi.first.wpilibj.SPI;
 import edu.wpi.first.wpilibj.Talon;
 import edu.wpi.first.wpilibj.command.Subsystem;
 import edu.wpi.first.wpilibj.livewindow.LiveWindow;
@@ -20,6 +23,7 @@ public class DriveTrain extends Subsystem {
 	//straight pid(angle)= setL&R(speed-pidGet, speed+pidGet), rates straight to motors
     private PIDController straightPID, leftRatePID, rightRatePID;
 	private Encoder leftEncoder, rightEncoder;
+	private AHRS navX;
 	
 	private static double ratePIDPTerm, ratePIDITerm, ratePIDDTerm;
     
@@ -44,11 +48,19 @@ public class DriveTrain extends Subsystem {
     	leftRatePID.setInputRange(-RobotMap.DRIVE_TOP_SPEED, RobotMap.DRIVE_TOP_SPEED);
     	rightRatePID.setInputRange(-RobotMap.DRIVE_TOP_SPEED, RobotMap.DRIVE_TOP_SPEED);
     	
+    	try {
+    		navX = new AHRS(SPI.Port.kMXP);
+        } catch (RuntimeException ex ) {
+            System.out.println("Error instantiating navX MXP:  " + ex.getMessage());
+        }
     	
     	LiveWindow.addActuator("DriveTrain","Left Motor Controller", leftTalon);
     	LiveWindow.addActuator("DriveTrain","Right Motor Controller", rightTalon);
+    	LiveWindow.addActuator("DriveTrain","Left Motor PID", leftRatePID);
+    	LiveWindow.addActuator("DriveTrain","Right Motor PID", rightRatePID);
     	LiveWindow.addSensor("DriveTrain", "Left Encoder", leftEncoder);
     	LiveWindow.addSensor("DriveTrain", "Right Encoder", rightEncoder);
+    	LiveWindow.addSensor("DriveTrain", "NavX", navX);
     }
 
     //setL&R, if encoderEnable LRate.setSetpoint(lspeed * MaxSpeed)...
@@ -73,6 +85,14 @@ public class DriveTrain extends Subsystem {
 
 	public double getLeftEncoderDistance() {
 		return leftEncoder.getDistance();
+	}
+	
+	public void resetAngle(){
+		navX.zeroYaw();
+	}
+	
+	public double getAngle(){
+		return navX.getAngle();
 	}
 }
 
