@@ -38,11 +38,11 @@ public class OI {
     	return rightJoystick.getTrigger();
     }
     
-    public boolean getIntakeUpSwitch(){
+    public boolean getIntakeInSwitch(){
     	return enhancedDS.getRawButton(RobotMap.INTAKE_UP_PORT);
     }
     
-    public boolean getIntakeDownSwitch(){
+    public boolean getIntakeOutSwitch(){
     	return enhancedDS.getRawButton(RobotMap.INTAKE_DOWN_PORT);
     }
 }

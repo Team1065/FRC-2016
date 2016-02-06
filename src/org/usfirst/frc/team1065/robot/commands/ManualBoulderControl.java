@@ -20,13 +20,29 @@ public class ManualBoulderControl extends Command {
 
     // Called repeatedly when this Command is scheduled to run
     protected void execute() {
-    	//intake roller
-    	if(Robot.oi.getIntakeUpSwitch()){
+    	
+    	if(Robot.oi.getIntakeOutSwitch()){
     		Robot.intake.setIntakeOut(RobotMap.INTAKE_OUT_SPEED);
+    		
+    		if(Robot.oi.getRightJoystickTrigger()){
+    			Robot.intake.setQueuingDown(RobotMap.QUEUING_DOWN_SPEED);
+    		}
+    		else{
+    			Robot.intake.setQueuingDown(0.0);
+    		}
     	}
-    	else if(Robot.oi.getIntakeDownSwitch()){
-    		if(Robot.intake.getTopIR()){
-    			Robot.intake.setIntake(0.0);
+    	else if(Robot.oi.getIntakeInSwitch()){
+    		
+    		if(Robot.oi.getRightJoystickTrigger() || !Robot.intake.getQueuingIR()){//and shooter speed is adequate
+				Robot.intake.setQueuingUp(RobotMap.QUEUING_UP_SPEED);
+			}
+			else{
+				Robot.intake.setQueuingDown(0.0);
+			}
+    		
+    		
+    		if(Robot.intake.getQueuingIR()){
+    			Robot.intake.setIntakeOut(RobotMap.INTAKE_OUT_SPEED);
     		}
     		else{
     			Robot.intake.setIntakeIn(RobotMap.INTAKE_IN_SPEED);
@@ -34,34 +50,7 @@ public class ManualBoulderControl extends Command {
     	}
     	else{
     		Robot.intake.setIntake(0.0);
-    	}
-    	
-    	//queuing roller
-    	if(Robot.oi.getRightJoystickTrigger()){
-    		if(Robot.oi.getIntakeUpSwitch()){
-        		//might want to either add a delay or check the speed of the intake to make sure it is up to speed.
-        		Robot.intake.setQueuingDown(RobotMap.QUEUING_DOWN_SPEED);
-        	}
-    		else{
-    			if(true){//shooter at speed
-    				Robot.intake.setQueuingUp(RobotMap.QUEUING_UP_SPEED);
-    			}
-    			else if(!Robot.intake.getBottomIR()){
-    				Robot.intake.setQueuingDown(RobotMap.QUEUING_DOWN_SPEED);
-    			}
-    			else{
-    				//TODO: shooter set speed here
-    				Robot.intake.setQueuing(0.0);
-    			}
-    		}
-    	}
-    	else{
-    		if(Robot.oi.getIntakeDownSwitch() && !Robot.intake.getTopIR()){
-    			Robot.intake.setQueuingUp(RobotMap.QUEUING_UP_SPEED);
-    		}
-    		else{
-    			Robot.intake.setQueuing(0.0);
-    		}
+    		Robot.intake.setQueuing(0.0);
     	}
     }
 

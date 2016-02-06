@@ -13,6 +13,7 @@ import edu.wpi.first.wpilibj.SPI;
 import edu.wpi.first.wpilibj.Talon;
 import edu.wpi.first.wpilibj.command.Subsystem;
 import edu.wpi.first.wpilibj.livewindow.LiveWindow;
+import edu.wpi.first.wpilibj.smartdashboard.SmartDashboard;
 
 /**
  *
@@ -72,6 +73,8 @@ public class DriveTrain extends Subsystem {
     public void tankDrive(double leftSpeed, double rightSpeed){
     	leftTalon.set(leftSpeed);
     	rightTalon.set(rightSpeed);
+    	//TODO: delete
+    	SmartDashboard.putNumber("IMU_TotalYaw", getAngle());
     }
     
     public void resetEncoders() {

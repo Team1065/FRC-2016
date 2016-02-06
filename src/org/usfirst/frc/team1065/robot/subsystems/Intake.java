@@ -13,19 +13,17 @@ import edu.wpi.first.wpilibj.livewindow.LiveWindow;
  */
 public class Intake extends Subsystem {
     Talon intakeMotor, queuingMotor;
-    DigitalInput topIR, bottomIR;
+    DigitalInput queuingIR;
     
 	public Intake(){
 		intakeMotor = new Talon(RobotMap.INTAKE_MOTOR_PORT);
 		queuingMotor = new Talon(RobotMap.QUEUING_MOTOR_PORT);
 		
-		topIR = new DigitalInput(RobotMap.TOP_INTAKE_IR_PORT);
-		bottomIR = new DigitalInput(RobotMap.BOTTOM_INTAKE_IR_PORT);
+		queuingIR = new DigitalInput(RobotMap.QUEUING_IR_PORT);
 		
 		LiveWindow.addActuator("Intake","Intake Motor", intakeMotor);
 		LiveWindow.addActuator("Queuing", "Queuing Motor", queuingMotor);
-		LiveWindow.addSensor("Intake", "Top IR", topIR);
-		LiveWindow.addSensor("Intake", "Bottom IR", bottomIR);
+		LiveWindow.addSensor("Intake", "queuingIR", queuingIR);
 	}
 
     public void initDefaultCommand() {
@@ -56,12 +54,8 @@ public class Intake extends Subsystem {
     	intakeMotor.set(speed);
     }
     
-    public boolean getTopIR(){
-    	return topIR.get();
-    }
-    
-    public boolean getBottomIR(){
-    	return bottomIR.get();
+    public boolean getQueuingIR(){
+    	return !queuingIR.get();
     }
 }
 
