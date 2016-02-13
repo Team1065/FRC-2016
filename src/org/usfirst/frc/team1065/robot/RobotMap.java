@@ -73,4 +73,8 @@ public class RobotMap {
     						   SHOOTER_KNOB_POS_3 = 0.071,
     						   SHOOTER_KNOB_POS_4 = 0.094,
     						   SHOOTER_KNOB_POS_5 = 0.118;
+    
+    //Camera Names
+    public static String FRONT_CAM = "cam0", 
+    					 BACK_CAM  = "cam1";
 }

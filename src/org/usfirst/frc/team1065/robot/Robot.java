@@ -1,6 +1,7 @@
 
 package org.usfirst.frc.team1065.robot;
 
+import org.usfirst.frc.team1065.robot.subsystems.CameraSystem;
 import org.usfirst.frc.team1065.robot.subsystems.DriveTrain;
 import org.usfirst.frc.team1065.robot.subsystems.Intake;
 import org.usfirst.frc.team1065.robot.subsystems.Lighting;
@@ -19,6 +20,7 @@ public class Robot extends IterativeRobot {
 	public static Intake intake;
 	public static Shooter shooter;
 	public static Lighting lighting;
+	public static CameraSystem camera;
 
     public void robotInit() {
 		oi = new OI();
@@ -26,6 +28,7 @@ public class Robot extends IterativeRobot {
 		intake = new Intake();
 		shooter = new Shooter();
 		lighting = new Lighting();
+		camera = new CameraSystem();
     }
 	
 	public void disabledPeriodic() {
@@ -48,6 +51,7 @@ public class Robot extends IterativeRobot {
 
     public void teleopPeriodic() {
         Scheduler.getInstance().run();
+        camera.sendImageToDS();
     }
     
     public void testPeriodic() {
