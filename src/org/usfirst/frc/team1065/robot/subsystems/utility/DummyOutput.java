@@ -35,7 +35,6 @@ public class DummyOutput implements SpeedController {
 		return false;
 	}
 
-	@Override
 	public void stopMotor() {
 		output = 0;
 		
