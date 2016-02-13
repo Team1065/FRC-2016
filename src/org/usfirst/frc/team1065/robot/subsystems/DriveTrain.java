@@ -26,9 +26,9 @@ public class DriveTrain extends Subsystem {
     private PIDController straightPID, leftRatePID, rightRatePID;
 	private Encoder leftEncoder, rightEncoder;
 	private AHRS navX;
-	private DummyOutput dummy;
+	private DummyOutput dummyStraight;
 	
-	private static double ratePIDPTerm, ratePIDITerm, ratePIDDTerm, straightPIDPTerm, straightPIDITerm, straightPIDDTerm;
+	private static double ratePIDPTerm, ratePIDITerm, ratePIDDTerm, straightPIDPTerm, straightPIDITerm, straightPIDDTerm, straightPIDPeriod;
     
     public DriveTrain(){
     	leftEncoder = new Encoder(RobotMap.LEFT_DRIVE_ENCODER_PORT_A,RobotMap.LEFT_DRIVE_ENCODER_PORT_B,true,CounterBase.EncodingType.k1X);
@@ -49,6 +49,7 @@ public class DriveTrain extends Subsystem {
     	straightPIDPTerm = 0.0;
     	straightPIDITerm = 0.0;
     	straightPIDDTerm = 0.0;
+    	straightPIDPeriod = 0.02;
     	
     	leftRatePID = new PIDController(ratePIDPTerm,ratePIDITerm, ratePIDDTerm, leftEncoder, leftTalon);
     	rightRatePID = new PIDController(ratePIDPTerm,ratePIDITerm, ratePIDDTerm, rightEncoder, rightTalon);
@@ -59,8 +60,14 @@ public class DriveTrain extends Subsystem {
             System.out.println("Error instantiating navX MXP:  " + ex.getMessage());
         }
     	
-    	dummy = new DummyOutput();
-    	straightPID = new PIDController(straightPIDPTerm, straightPIDITerm, straightPIDDTerm, navX, dummy);
+    	dummyStraight = new DummyOutput();
+    	straightPID = new PIDController(straightPIDPTerm, straightPIDITerm, straightPIDDTerm, navX, dummyStraight, straightPIDPeriod);
+    	straightPID.setInputRange(-180.0f,  180.0f);
+    	straightPID.setOutputRange(-1.0, 1.0);
+    	straightPID.setAbsoluteTolerance(3);
+    	straightPID.setContinuous(true);
+    	straightPID.setSetpoint(0.0);
+    	
     	
     	LiveWindow.addActuator("DriveTrain","Left Motor Controller", leftTalon);
     	LiveWindow.addActuator("DriveTrain","Right Motor Controller", rightTalon);
@@ -90,6 +97,18 @@ public class DriveTrain extends Subsystem {
     	
     	//TODO: delete
     	SmartDashboard.putNumber("IMU_TotalYaw", getAngle());
+    	SmartDashboard.putNumber("navX yaw", navX.getYaw());
+    }
+    
+    public void DriveStraight(double speed){
+    	if(straightPID.isEnabled()){
+    		double leftSpeed = speed + dummyStraight.get();
+    		double rightSpeed = speed - dummyStraight.get();
+    		tankDrive(leftSpeed, rightSpeed);
+    	}
+    	else{
+    		tankDrive(speed, speed);
+    	}
     }
     
     public void resetEncoders() {

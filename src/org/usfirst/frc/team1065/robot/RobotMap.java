@@ -37,9 +37,6 @@ public class RobotMap {
     						   SHOOTER_VOLT_4 = 0.8,
     						   SHOOTER_VOLT_5 = 1.0;
     
-    //PID Variables
-    public static final double DRIVE_MOTOR_KP = .1;//TODO: tune
-    
     //PWM Ports
     public static final int LEFT_DRIVE_MOTOR_PORT = 0,
     				  	    RIGHT_DRIVE_MOTOR_PORT = 1,
