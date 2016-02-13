@@ -46,7 +46,9 @@ public class RobotMap {
 				  	    	INTAKE_MOTOR_PORT = 2,
 				  	    	QUEUING_MOTOR_PORT = 3,
 				  	    	SHOOTER_MOTOR_PORT = 4;
-    
+    //PCM Ports
+    public static final int INTAKE_LED_PORT = 0,
+	  	    				SHOOTER_LED_PORT = 1;
     //Digital Ports
     public static final int LEFT_DRIVE_ENCODER_PORT_A = 0,
 	    				    LEFT_DRIVE_ENCODER_PORT_B = 1,

@@ -5,6 +5,7 @@ import org.usfirst.frc.team1065.robot.RobotMap;
 import edu.wpi.first.wpilibj.Counter;
 import edu.wpi.first.wpilibj.PIDController;
 import edu.wpi.first.wpilibj.PIDSourceType;
+import edu.wpi.first.wpilibj.Solenoid;
 import edu.wpi.first.wpilibj.Talon;
 import edu.wpi.first.wpilibj.command.Subsystem;
 import edu.wpi.first.wpilibj.livewindow.LiveWindow;
@@ -22,7 +23,7 @@ public class Shooter extends Subsystem {
     public Shooter(){
     	shooterMotor = new Talon(RobotMap.SHOOTER_MOTOR_PORT);
     	shooterCounter = new Counter(RobotMap.SHOOTER_COUNTER_PORT);
-    	shooterCounter.setDistancePerPulse(.5 * 60);//1 revolution per pulse. 60 to transform seconds to minutes
+    	shooterCounter.setDistancePerPulse(.5 * 60);//.5 revolution per pulse. 60 to transform seconds to minutes
     	shooterCounter.setPIDSourceType(PIDSourceType.kRate);
     	shooterCounter.setSamplesToAverage(10);
     	shooterCounter.setSemiPeriodMode(true);
@@ -75,7 +76,6 @@ public class Shooter extends Subsystem {
     	else{
     		shooterMotor.set(speed);
     	}
-    	
     }
 }
 

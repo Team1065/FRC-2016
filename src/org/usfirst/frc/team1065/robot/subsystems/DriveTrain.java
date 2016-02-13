@@ -2,6 +2,7 @@ package org.usfirst.frc.team1065.robot.subsystems;
 
 import org.usfirst.frc.team1065.robot.RobotMap;
 import org.usfirst.frc.team1065.robot.commands.DriveWithJoysticks;
+import org.usfirst.frc.team1065.robot.subsystems.utility.DummyOutput;
 
 import com.kauailabs.navx.frc.AHRS;
 
@@ -25,8 +26,9 @@ public class DriveTrain extends Subsystem {
     private PIDController straightPID, leftRatePID, rightRatePID;
 	private Encoder leftEncoder, rightEncoder;
 	private AHRS navX;
+	private DummyOutput dummy;
 	
-	private static double ratePIDPTerm, ratePIDITerm, ratePIDDTerm;
+	private static double ratePIDPTerm, ratePIDITerm, ratePIDDTerm, straightPIDPTerm, straightPIDITerm, straightPIDDTerm;
     
     public DriveTrain(){
     	leftEncoder = new Encoder(RobotMap.LEFT_DRIVE_ENCODER_PORT_A,RobotMap.LEFT_DRIVE_ENCODER_PORT_B,true,CounterBase.EncodingType.k1X);
@@ -44,21 +46,27 @@ public class DriveTrain extends Subsystem {
     	ratePIDITerm = 0.0;
     	ratePIDDTerm = 0.0;
     	
+    	straightPIDPTerm = 0.0;
+    	straightPIDITerm = 0.0;
+    	straightPIDDTerm = 0.0;
+    	
     	leftRatePID = new PIDController(ratePIDPTerm,ratePIDITerm, ratePIDDTerm, leftEncoder, leftTalon);
     	rightRatePID = new PIDController(ratePIDPTerm,ratePIDITerm, ratePIDDTerm, rightEncoder, rightTalon);
-    	//leftRatePID.setInputRange(-RobotMap.DRIVE_TOP_SPEED, RobotMap.DRIVE_TOP_SPEED);
-    	//rightRatePID.setInputRange(-RobotMap.DRIVE_TOP_SPEED, RobotMap.DRIVE_TOP_SPEED);
-    	
+   	
     	try {
     		navX = new AHRS(SPI.Port.kMXP);
         } catch (RuntimeException ex ) {
             System.out.println("Error instantiating navX MXP:  " + ex.getMessage());
         }
     	
+    	dummy = new DummyOutput();
+    	straightPID = new PIDController(straightPIDPTerm, straightPIDITerm, straightPIDDTerm, navX, dummy);
+    	
     	LiveWindow.addActuator("DriveTrain","Left Motor Controller", leftTalon);
     	LiveWindow.addActuator("DriveTrain","Right Motor Controller", rightTalon);
     	LiveWindow.addActuator("DriveTrain","Left Motor PID", leftRatePID);
     	LiveWindow.addActuator("DriveTrain","Right Motor PID", rightRatePID);
+    	LiveWindow.addActuator("DriveTrain","Straight PID", straightPID);
     	LiveWindow.addSensor("DriveTrain", "Left Encoder", leftEncoder);
     	LiveWindow.addSensor("DriveTrain", "Right Encoder", rightEncoder);
     	LiveWindow.addSensor("DriveTrain", "NavX", navX);
@@ -114,6 +122,18 @@ public class DriveTrain extends Subsystem {
     	
     	if(!rightRatePID.isEnabled()){
     		rightRatePID.enable();
+    	}
+    }
+    
+    public void enableStraightController(){
+    	if(!straightPID.isEnabled()){
+    		straightPID.enable();
+    	}
+    }
+    
+    public void disableStraightControllers(){
+    	if(straightPID.isEnabled()){
+    		straightPID.disable();
     	}
     }
 	

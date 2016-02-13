@@ -4,6 +4,7 @@ import org.usfirst.frc.team1065.robot.RobotMap;
 import org.usfirst.frc.team1065.robot.commands.ManualBoulderControl;
 
 import edu.wpi.first.wpilibj.DigitalInput;
+import edu.wpi.first.wpilibj.Solenoid;
 import edu.wpi.first.wpilibj.Talon;
 import edu.wpi.first.wpilibj.command.Subsystem;
 import edu.wpi.first.wpilibj.livewindow.LiveWindow;
@@ -12,8 +13,8 @@ import edu.wpi.first.wpilibj.livewindow.LiveWindow;
  *
  */
 public class Intake extends Subsystem {
-    Talon intakeMotor, queuingMotor;
-    DigitalInput queuingIR;
+    private Talon intakeMotor, queuingMotor;
+    private DigitalInput queuingIR;
     
 	public Intake(){
 		intakeMotor = new Talon(RobotMap.INTAKE_MOTOR_PORT);
@@ -24,7 +25,7 @@ public class Intake extends Subsystem {
 		queuingIR = new DigitalInput(RobotMap.QUEUING_IR_PORT);
 		
 		LiveWindow.addActuator("Intake","Intake Motor", intakeMotor);
-		LiveWindow.addActuator("Queuing", "Queuing Motor", queuingMotor);
+		LiveWindow.addActuator("Intake", "Queuing Motor", queuingMotor);
 		LiveWindow.addSensor("Intake", "queuingIR", queuingIR);
 	}
 
