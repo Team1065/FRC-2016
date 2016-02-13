@@ -46,8 +46,8 @@ public class DriveTrain extends Subsystem {
     	
     	leftRatePID = new PIDController(ratePIDPTerm,ratePIDITerm, ratePIDDTerm, leftEncoder, leftTalon);
     	rightRatePID = new PIDController(ratePIDPTerm,ratePIDITerm, ratePIDDTerm, rightEncoder, rightTalon);
-    	leftRatePID.setInputRange(-RobotMap.DRIVE_TOP_SPEED, RobotMap.DRIVE_TOP_SPEED);
-    	rightRatePID.setInputRange(-RobotMap.DRIVE_TOP_SPEED, RobotMap.DRIVE_TOP_SPEED);
+    	//leftRatePID.setInputRange(-RobotMap.DRIVE_TOP_SPEED, RobotMap.DRIVE_TOP_SPEED);
+    	//rightRatePID.setInputRange(-RobotMap.DRIVE_TOP_SPEED, RobotMap.DRIVE_TOP_SPEED);
     	
     	try {
     		navX = new AHRS(SPI.Port.kMXP);
@@ -71,8 +71,15 @@ public class DriveTrain extends Subsystem {
     }
     
     public void tankDrive(double leftSpeed, double rightSpeed){
-    	leftTalon.set(leftSpeed);
-    	rightTalon.set(rightSpeed);
+    	if(leftRatePID.isEnabled()){
+    		leftRatePID.setSetpoint(leftSpeed * RobotMap.DRIVE_TOP_SPEED);
+    		rightRatePID.setSetpoint(leftSpeed * RobotMap.DRIVE_TOP_SPEED);
+    	}
+    	else{
+    		leftTalon.set(leftSpeed);
+        	rightTalon.set(rightSpeed);
+    	}
+    	
     	//TODO: delete
     	SmartDashboard.putNumber("IMU_TotalYaw", getAngle());
     }
@@ -89,6 +96,26 @@ public class DriveTrain extends Subsystem {
 	public double getLeftEncoderDistance() {
 		return leftEncoder.getDistance();
 	}
+	
+	public void enableRateControllers(){
+    	if(!leftRatePID.isEnabled()){
+    		leftRatePID.enable();
+    	}
+    	
+    	if(!rightRatePID.isEnabled()){
+    		rightRatePID.enable();
+    	}
+    }
+    
+    public void disableRateControllers(){
+    	if(leftRatePID.isEnabled()){
+    		leftRatePID.disable();
+    	}
+    	
+    	if(!rightRatePID.isEnabled()){
+    		rightRatePID.enable();
+    	}
+    }
 	
 	public void resetAngle(){
 		navX.zeroYaw();

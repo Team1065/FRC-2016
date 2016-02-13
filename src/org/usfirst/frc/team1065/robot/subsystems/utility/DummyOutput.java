@@ -34,4 +34,10 @@ public class DummyOutput implements SpeedController {
 	public boolean getInverted() {
 		return false;
 	}
+
+	@Override
+	public void stopMotor() {
+		output = 0;
+		
+	}
 }

@@ -3,6 +3,7 @@ package org.usfirst.frc.team1065.robot;
 
 import org.usfirst.frc.team1065.robot.subsystems.DriveTrain;
 import org.usfirst.frc.team1065.robot.subsystems.Intake;
+import org.usfirst.frc.team1065.robot.subsystems.Shooter;
 
 import edu.wpi.first.wpilibj.IterativeRobot;
 import edu.wpi.first.wpilibj.command.Command;
@@ -15,11 +16,13 @@ public class Robot extends IterativeRobot {
 	public static OI oi;
 	public static DriveTrain drive;
 	public static Intake intake;
+	public static Shooter shooter;
 
     public void robotInit() {
 		oi = new OI();
 		drive = new DriveTrain();
 		intake = new Intake();
+		shooter = new Shooter();
     }
 	
 	public void disabledPeriodic() {

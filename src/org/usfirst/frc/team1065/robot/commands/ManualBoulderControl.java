@@ -33,7 +33,7 @@ public class ManualBoulderControl extends Command {
     	}
     	else if(Robot.oi.getIntakeInSwitch()){
     		
-    		if(Robot.oi.getRightJoystickTrigger() || !Robot.intake.getQueuingIR()){//and shooter speed is adequate
+    		if((Robot.oi.getRightJoystickTrigger() && Robot.shooter.onTarget()) || !Robot.intake.getQueuingIR()){
 				Robot.intake.setQueuingUp(RobotMap.QUEUING_UP_SPEED);
 			}
 			else{
@@ -42,7 +42,7 @@ public class ManualBoulderControl extends Command {
     		
     		
     		if(Robot.intake.getQueuingIR()){
-    			Robot.intake.setIntakeOut(RobotMap.INTAKE_OUT_SPEED);
+    			Robot.intake.setIntakeOut(0.0);//might want reverse
     		}
     		else{
     			Robot.intake.setIntakeIn(RobotMap.INTAKE_IN_SPEED);
