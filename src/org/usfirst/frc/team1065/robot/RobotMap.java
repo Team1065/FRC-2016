@@ -18,7 +18,7 @@ public class RobotMap {
 	    					   JOYSTICK_DEADBAND = 0.1,
 	    					   QUEUING_UP_SPEED = 1.0,
 	    					   QUEUING_DOWN_SPEED = 1.0,
-	    					   DRIVE_STRAIGHT_BAND_PERCENTAGE = 0.25,
+	    					   DRIVE_STRAIGHT_BAND_PERCENTAGE = 0.15,
 	    					   SHOOTER_TOLERANCE = 100;//if we are within 100 rpm we are on target
     
     //Shooter RPM values

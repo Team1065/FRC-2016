@@ -8,13 +8,13 @@ import edu.wpi.first.wpilibj.command.Command;
  *
  */
 public class DriveToDistance extends Command {
-	double speed, distance, time;
+	double speed, distance;
     public DriveToDistance(double speed, double distance, double time) {
         requires(Robot.drive);
         
         this.speed = speed;
         this.distance = distance;
-        this.time = time;
+        this.setTimeout(time);
         
     }
 
@@ -31,7 +31,7 @@ public class DriveToDistance extends Command {
 
     // Make this return true when this Command no longer needs to run execute()
     protected boolean isFinished() {
-        return false;
+        return  Math.abs(Robot.drive.getLeftEncoderDistance()) >= distance || this.isTimedOut();
     }
 
     // Called once after isFinished returns true

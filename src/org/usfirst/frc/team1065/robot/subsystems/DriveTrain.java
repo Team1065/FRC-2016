@@ -42,7 +42,7 @@ public class DriveTrain extends Subsystem {
     	rightTalon = new Talon(RobotMap.RIGHT_DRIVE_MOTOR_PORT);
     	rightTalon.setInverted(true);
     	
-    	ratePIDPTerm = 0.0;
+    	ratePIDPTerm = 0.0007;
     	ratePIDITerm = 0.0;
     	ratePIDDTerm = 0.0;
     	
@@ -56,6 +56,8 @@ public class DriveTrain extends Subsystem {
    	
     	try {
     		navX = new AHRS(SPI.Port.kMXP);
+    		navX.reset();
+    		navX.zeroYaw();
         } catch (RuntimeException ex ) {
             System.out.println("Error instantiating navX MXP:  " + ex.getMessage());
         }
@@ -88,7 +90,7 @@ public class DriveTrain extends Subsystem {
     public void tankDrive(double leftSpeed, double rightSpeed){
     	if(leftRatePID.isEnabled()){
     		leftRatePID.setSetpoint(leftSpeed * RobotMap.DRIVE_TOP_SPEED);
-    		rightRatePID.setSetpoint(leftSpeed * RobotMap.DRIVE_TOP_SPEED);
+    		rightRatePID.setSetpoint(rightSpeed * RobotMap.DRIVE_TOP_SPEED);
     	}
     	else{
     		leftTalon.set(leftSpeed);
@@ -98,6 +100,8 @@ public class DriveTrain extends Subsystem {
     	//TODO: delete
     	SmartDashboard.putNumber("IMU_TotalYaw", getAngle());
     	SmartDashboard.putNumber("navX yaw", navX.getYaw());
+    	SmartDashboard.putNumber("left speed", leftEncoder.getRate());
+    	SmartDashboard.putNumber("right speed", rightEncoder.getRate());
     }
     
     public void DriveStraight(double speed){
@@ -139,8 +143,8 @@ public class DriveTrain extends Subsystem {
     		leftRatePID.disable();
     	}
     	
-    	if(!rightRatePID.isEnabled()){
-    		rightRatePID.enable();
+    	if(rightRatePID.isEnabled()){
+    		rightRatePID.disable();
     	}
     }
     
@@ -161,7 +165,7 @@ public class DriveTrain extends Subsystem {
 	}
 	
 	public double getAngle(){
-		return navX.getAngle();
+		return navX.getYaw();//-180 - 180
 	}
 }
 
