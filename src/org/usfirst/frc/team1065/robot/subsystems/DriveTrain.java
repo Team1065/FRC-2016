@@ -28,7 +28,7 @@ public class DriveTrain extends Subsystem {
 	private AHRS navX;
 	private DummyOutput dummyStraight;
 	
-	private static double ratePIDPTerm, ratePIDITerm, ratePIDDTerm, straightPIDPTerm, straightPIDITerm, straightPIDDTerm, straightPIDPeriod;
+	private static double ratePIDPTerm, ratePIDITerm, ratePIDDTerm, straightPIDPTerm, straightPIDITerm, straightPIDDTerm, PIDPeriod;
     
     public DriveTrain(){
     	leftEncoder = new Encoder(RobotMap.LEFT_DRIVE_ENCODER_PORT_A,RobotMap.LEFT_DRIVE_ENCODER_PORT_B,true,CounterBase.EncodingType.k1X);
@@ -46,13 +46,14 @@ public class DriveTrain extends Subsystem {
     	ratePIDITerm = 0.0;
     	ratePIDDTerm = 0.0;
     	
-    	straightPIDPTerm = 0.0;
+    	straightPIDPTerm = 0.02;
     	straightPIDITerm = 0.0;
     	straightPIDDTerm = 0.0;
-    	straightPIDPeriod = 0.02;
     	
-    	leftRatePID = new PIDController(ratePIDPTerm,ratePIDITerm, ratePIDDTerm, leftEncoder, leftTalon);
-    	rightRatePID = new PIDController(ratePIDPTerm,ratePIDITerm, ratePIDDTerm, rightEncoder, rightTalon);
+    	PIDPeriod = 0.02;
+    	
+    	leftRatePID = new PIDController(ratePIDPTerm,ratePIDITerm, ratePIDDTerm, leftEncoder, leftTalon,PIDPeriod);
+    	rightRatePID = new PIDController(ratePIDPTerm,ratePIDITerm, ratePIDDTerm, rightEncoder, rightTalon,PIDPeriod);
    	
     	try {
     		navX = new AHRS(SPI.Port.kMXP);
@@ -63,9 +64,9 @@ public class DriveTrain extends Subsystem {
         }
     	
     	dummyStraight = new DummyOutput();
-    	straightPID = new PIDController(straightPIDPTerm, straightPIDITerm, straightPIDDTerm, navX, dummyStraight, straightPIDPeriod);
+    	straightPID = new PIDController(straightPIDPTerm, straightPIDITerm, straightPIDDTerm, navX, dummyStraight, PIDPeriod);
     	straightPID.setInputRange(-180.0f,  180.0f);
-    	straightPID.setOutputRange(-1.0, 1.0);
+    	straightPID.setOutputRange(-0.5, 0.5);
     	straightPID.setAbsoluteTolerance(3);
     	straightPID.setContinuous(true);
     	straightPID.setSetpoint(0.0);
@@ -166,6 +167,14 @@ public class DriveTrain extends Subsystem {
 	
 	public double getAngle(){
 		return navX.getYaw();//-180 - 180
+	}
+	
+	public boolean angleOnTarget(){
+		return straightPID.onTarget();
+	}
+	
+	public void setAngle(double angle){
+		straightPID.setSetpoint(angle);
 	}
 }
 

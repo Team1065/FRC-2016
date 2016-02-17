@@ -9,6 +9,7 @@ import edu.wpi.first.wpilibj.Solenoid;
 import edu.wpi.first.wpilibj.Talon;
 import edu.wpi.first.wpilibj.command.Subsystem;
 import edu.wpi.first.wpilibj.livewindow.LiveWindow;
+import edu.wpi.first.wpilibj.smartdashboard.SmartDashboard;
 
 /**
  *
@@ -76,6 +77,9 @@ public class Shooter extends Subsystem {
     	else{
     		shooterMotor.set(speed);
     	}
+    	
+    	//TODO: delete
+    	SmartDashboard.putNumber("Shooter Speed", shooterCounter.getRate());
     }
 }
 

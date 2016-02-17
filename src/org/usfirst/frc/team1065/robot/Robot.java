@@ -36,6 +36,19 @@ public class Robot extends IterativeRobot {
 	}
 
     public void autonomousInit() {
+    	if(oi.getDriveOverride()){
+    		drive.disableRateControllers();
+    	}
+    	else{
+    		drive.enableRateControllers();
+    	}
+    	
+    	if(oi.getShooterOverride()){
+    		shooter.disablePIDController();
+    	}
+    	else{
+    		shooter.enablePIDController();
+    	}
     }
 
     public void autonomousPeriodic() {

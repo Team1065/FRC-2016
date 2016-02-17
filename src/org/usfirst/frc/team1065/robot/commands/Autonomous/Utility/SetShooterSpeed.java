@@ -1,4 +1,4 @@
-package org.usfirst.frc.team1065.robot.commands;
+package org.usfirst.frc.team1065.robot.commands.Autonomous.Utility;
 
 import org.usfirst.frc.team1065.robot.Robot;
 
@@ -7,32 +7,25 @@ import edu.wpi.first.wpilibj.command.Command;
 /**
  *
  */
-public class ManualShooterControl extends Command {
-
-    public ManualShooterControl() {
+public class SetShooterSpeed extends Command {
+	double speed;
+    public SetShooterSpeed(double speed) {
         requires(Robot.shooter);
+        this.speed = speed;
     }
 
     // Called just before this Command runs the first time
     protected void initialize() {
+    	Robot.shooter.set(speed);
     }
 
     // Called repeatedly when this Command is scheduled to run
     protected void execute() {
-    	//TODO: consider only enabling disabling on an edge transition
-    	if(Robot.oi.getShooterOverride()){
-    		Robot.shooter.disablePIDController();
-    	}
-    	else{
-    		Robot.shooter.enablePIDController();
-    	}
-    	
-    	Robot.shooter.set(Robot.oi.getShooterDesiredSpeed());
     }
 
     // Make this return true when this Command no longer needs to run execute()
     protected boolean isFinished() {
-        return false;
+        return true;
     }
 
     // Called once after isFinished returns true

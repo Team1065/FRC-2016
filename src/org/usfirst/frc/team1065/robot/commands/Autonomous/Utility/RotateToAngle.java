@@ -7,44 +7,49 @@ import edu.wpi.first.wpilibj.command.Command;
 /**
  *
  */
-public class DriveToDistance extends Command {
-	double speed, distance;
-	//set speed negative to go backwards
-    public DriveToDistance(double speed, double distance, double time) {
+public class RotateToAngle extends Command {
+	double speed, angle;
+	
+    public RotateToAngle(double speed, double angle, double time) {
         requires(Robot.drive);
         
-        this.speed = speed;
-        this.distance = Math.abs(distance);
+        this.speed = Math.abs(speed);//0,1
+        this.angle = angle;//-180,180
         this.setTimeout(time);
-        
     }
 
     // Called just before this Command runs the first time
     protected void initialize() {
-    	Robot.drive.resetEncoders();
-    	Robot.drive.resetAngle();
-    	Robot.drive.setAngle(0);
-    	Robot.drive.enableStraightController();
+    	Robot.drive.setAngle(angle);
+    	//TODO:might need this
+    	//Robot.drive.enableStraightController();
     }
 
     // Called repeatedly when this Command is scheduled to run
     protected void execute() {
-    	if(Math.abs(Robot.drive.getLeftEncoderDistance()) > distance-10){ //slow down 10 inches from the target
+    	double currentAngle = Robot.drive.getAngle();
+    	//slow down 10 degrees from the target
+    	if(currentAngle > angle-10 && currentAngle < angle+10){
     		speed = speed * 0.5;
     	}
     	
-    	Robot.drive.DriveStraight(speed);
+    	//direction of rotation decided based on target angle
+    	if(Robot.drive.getAngle() > angle){
+    		speed = speed * -1;
+    	}
     	
+    	Robot.drive.tankDrive(speed, -speed);
     }
 
     // Make this return true when this Command no longer needs to run execute()
     protected boolean isFinished() {
-        return  Math.abs(Robot.drive.getLeftEncoderDistance()) >= distance || this.isTimedOut();
+        return Robot.drive.angleOnTarget() || this.isTimedOut();
     }
 
     // Called once after isFinished returns true
     protected void end() {
-    	Robot.drive.disableStraightControllers();
+    	//TODO:might need this
+    	//Robot.drive.disableStraightControllers();
     	Robot.drive.tankDrive(0, 0);
     }
 
