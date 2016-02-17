@@ -74,4 +74,7 @@ public class RobotMap {
     //Camera Names
     public static String FRONT_CAM = "cam0", 
     					 BACK_CAM  = "cam1";
+    
+    public enum Position{FarLeft,Left,Middle,Right,FarRight};
+    public enum Obstacle{LiftGate,Seesaw,Moat,Ramparts,Drawbridge,Door,RockWall,RoughTerrian,LowBar};
 }
