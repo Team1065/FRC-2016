@@ -8,16 +8,15 @@ import edu.wpi.first.wpilibj.command.Command;
 /**
  *
  */
-public class SwitchCameraFeed extends Command {
+public class ManualCameraControl extends Command {
 	
-	public SwitchCameraFeed() {
+	public ManualCameraControl() {
         requires(Robot.camera);
     }
 
     protected void initialize() {
     }
 
-	@Override
 	protected void execute() {
 		 boolean leftTrig = Robot.oi.getLeftJoystickTrigger();
 		 
@@ -25,25 +24,23 @@ public class SwitchCameraFeed extends Command {
 			 Robot.camera.switchToFront();
 			 
 		 }
-		 else
+		 else{
 			 Robot.camera.switchToBack();
-		// TODO Auto-generated method stub
-		
+		 }
+		 
+		 Robot.camera.sendImageToDS();
 	}
 
-	@Override
 	protected boolean isFinished() {
 		// TODO Auto-generated method stub
 		return false;
 	}
 
-	@Override
 	protected void end() {
 		// TODO Auto-generated method stub
 		
 	}
 
-	@Override
 	protected void interrupted() {
 		// TODO Auto-generated method stub
 		

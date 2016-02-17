@@ -2,7 +2,7 @@ package org.usfirst.frc.team1065.robot.subsystems;
 
 import org.usfirst.frc.team1065.robot.RobotMap;
 import org.usfirst.frc.team1065.robot.commands.DriveWithJoysticks;
-import org.usfirst.frc.team1065.robot.commands.SwitchCameraFeed;
+import org.usfirst.frc.team1065.robot.commands.ManualCameraControl;
 
 import com.ni.vision.NIVision;
 import com.ni.vision.NIVision.Image;
@@ -27,7 +27,7 @@ public class CameraSystem extends Subsystem{
     }
     
 	protected void initDefaultCommand() {
-		setDefaultCommand(new SwitchCameraFeed());
+		setDefaultCommand(new ManualCameraControl());
 		
 	}
 	
