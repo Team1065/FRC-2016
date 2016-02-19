@@ -2,8 +2,13 @@
 package org.usfirst.frc.team1065.robot;
 
 import org.usfirst.frc.team1065.robot.RobotMap.Obstacle;
-import org.usfirst.frc.team1065.robot.RobotMap.Position;
+import org.usfirst.frc.team1065.robot.RobotMap.StartingPosition;
+import org.usfirst.frc.team1065.robot.RobotMap.TargetGoal;
+import org.usfirst.frc.team1065.robot.RobotMap.TargetPosition;
+import org.usfirst.frc.team1065.robot.commands.Autonomous.AutoCross;
+import org.usfirst.frc.team1065.robot.commands.Autonomous.AutoCrossBack;
 import org.usfirst.frc.team1065.robot.commands.Autonomous.AutoReach;
+import org.usfirst.frc.team1065.robot.commands.Autonomous.AutoShoot;
 import org.usfirst.frc.team1065.robot.subsystems.CameraSystem;
 import org.usfirst.frc.team1065.robot.subsystems.DriveTrain;
 import org.usfirst.frc.team1065.robot.subsystems.Intake;
@@ -41,11 +46,11 @@ public class Robot extends IterativeRobot {
 		camera = new CameraSystem();
 		
 		positionChooser = new SendableChooser();
-		positionChooser.addDefault("Far Left", Position.FarLeft);
-		positionChooser.addObject("Left", Position.Left);
-		positionChooser.addObject("Middle", Position.Middle);
-		positionChooser.addObject("Right", Position.Right);
-		positionChooser.addObject("Far Right", Position.FarRight);
+		positionChooser.addDefault("Far Left", StartingPosition.FarLeft);
+		positionChooser.addObject("Left", StartingPosition.Left);
+		positionChooser.addObject("Middle", StartingPosition.Middle);
+		positionChooser.addObject("Right", StartingPosition.Right);
+		positionChooser.addObject("Far Right", StartingPosition.FarRight);
         SmartDashboard.putData("Position Chooser", positionChooser);
 		
         obstacleChooser.addDefault("Portcullis (Lift Gate)", Obstacle.LiftGate);
@@ -60,13 +65,13 @@ public class Robot extends IterativeRobot {
         SmartDashboard.putData("Obstacle Chooser", obstacleChooser);
 		
         commandChooser.addDefault("Reach", new AutoReach());
-        /*commandChooser.addObject("Cross", new AutoCross());
+        commandChooser.addObject("Cross", new AutoCross());
         commandChooser.addObject("Cross Back", new AutoCrossBack());
-        commandChooser.addObject("Shoot High Left", new AutoHighLeft());
-        commandChooser.addObject("Shoot High Center", new AutoHighCenter());
-        commandChooser.addObject("Shoot High Right", new AutoHighRight());
-        commandChooser.addObject("Shoot Low Left", new AutoLowLeft());
-        commandChooser.addObject("Shoot Low right", new AutoLowRight());*/
+        commandChooser.addObject("Shoot High Left", new AutoShoot(TargetGoal.High, TargetPosition.Left));
+        commandChooser.addObject("Shoot High Center", new AutoShoot(TargetGoal.High, TargetPosition.Center));
+        commandChooser.addObject("Shoot High Right", new AutoShoot(TargetGoal.High, TargetPosition.Right));
+        commandChooser.addObject("Shoot Low Left", new AutoShoot(TargetGoal.Low, TargetPosition.Left));
+        commandChooser.addObject("Shoot Low right", new AutoShoot(TargetGoal.Low, TargetPosition.Right));
         SmartDashboard.putData("Command Chooser", commandChooser);
     }
 	

@@ -12,6 +12,7 @@ public class SetShooterSpeed extends Command {
     public SetShooterSpeed(double speed) {
         requires(Robot.shooter);
         this.speed = speed;
+        this.setTimeout(3);
     }
 
     // Called just before this Command runs the first time
@@ -25,7 +26,7 @@ public class SetShooterSpeed extends Command {
 
     // Make this return true when this Command no longer needs to run execute()
     protected boolean isFinished() {
-        return true;
+        return Robot.shooter.onTarget() || this.isTimedOut();
     }
 
     // Called once after isFinished returns true
