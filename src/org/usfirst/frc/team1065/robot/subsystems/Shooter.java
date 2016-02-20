@@ -30,7 +30,7 @@ public class Shooter extends Subsystem {
     	shooterCounter = new Counter(RobotMap.SHOOTER_COUNTER_PORT);
     	shooterCounter.setDistancePerPulse(.5 * 60);//.5 revolution per pulse. 60 to transform seconds to minutes
     	shooterCounter.setPIDSourceType(PIDSourceType.kRate);
-    	shooterCounter.setSamplesToAverage(1);//TODO: tune to try to filter rate better
+    	shooterCounter.setSamplesToAverage(5);//TODO: tune to try to filter rate better
     	shooterCounter.setSemiPeriodMode(true); 
     	
     	ratePIDPTerm = 1.0;//Making P very high so it behaves as a bang bang Controller
@@ -99,6 +99,7 @@ public class Shooter extends Subsystem {
     	
     	//TODO: delete
     	SmartDashboard.putNumber("Shooter Speed", shooterCounter.getRate());
+    	SmartDashboard.putNumber("Shooter period", shooterCounter.getPeriod());
     	SmartDashboard.putNumber("Shooter Speed custom", getShooterSpeed());
     }
 }
