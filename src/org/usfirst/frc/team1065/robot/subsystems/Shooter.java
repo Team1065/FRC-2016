@@ -8,6 +8,7 @@ import edu.wpi.first.wpilibj.PIDController;
 import edu.wpi.first.wpilibj.PIDSourceType;
 import edu.wpi.first.wpilibj.Solenoid;
 import edu.wpi.first.wpilibj.Talon;
+import edu.wpi.first.wpilibj.VictorSP;
 import edu.wpi.first.wpilibj.command.Subsystem;
 import edu.wpi.first.wpilibj.livewindow.LiveWindow;
 import edu.wpi.first.wpilibj.smartdashboard.SmartDashboard;
@@ -16,20 +17,21 @@ import edu.wpi.first.wpilibj.smartdashboard.SmartDashboard;
  *
  */
 public class Shooter extends Subsystem {
-    private Talon shooterMotor;
+    private VictorSP shooterMotor;
     private Counter shooterCounter;
     private PIDController shooterController;
     
     private static double ratePIDPTerm, ratePIDITerm, ratePIDDTerm, ratePIDPeriod;
+    private double prevCount, prevTime;
     
     public Shooter(){
-    	shooterMotor = new Talon(RobotMap.SHOOTER_MOTOR_PORT);
+    	shooterMotor = new VictorSP(RobotMap.SHOOTER_MOTOR_PORT);
     	shooterMotor.setInverted(true);
     	shooterCounter = new Counter(RobotMap.SHOOTER_COUNTER_PORT);
     	shooterCounter.setDistancePerPulse(.5 * 60);//.5 revolution per pulse. 60 to transform seconds to minutes
     	shooterCounter.setPIDSourceType(PIDSourceType.kRate);
-    	shooterCounter.setSamplesToAverage(5);
-    	shooterCounter.setSemiPeriodMode(true);
+    	shooterCounter.setSamplesToAverage(1);//TODO: tune to try to filter rate better
+    	shooterCounter.setSemiPeriodMode(true); 
     	
     	ratePIDPTerm = 1.0;//Making P very high so it behaves as a bang bang Controller
     	ratePIDITerm = 0.0;
@@ -75,6 +77,17 @@ public class Shooter extends Subsystem {
     	return shooterCounter.getRate();
     }
     
+    public double getShooterSpeed(){
+    	double curntTime = System.currentTimeMillis();
+    	double deltaTime = curntTime - prevTime;
+    	prevTime = curntTime;
+    	double curntCount = shooterCounter.get();
+    	double deltaCount = curntCount - prevCount;
+    	prevCount = curntCount;
+    	//TODO: if this works better we might want to also add a ringbuffer to filter the values
+    	return ((deltaCount/deltaTime)*1000*60)/2;
+    }
+    
     public void set(double speed){
     	//check if we should be setting the motor or the controller
     	if(shooterController.isEnabled()){
@@ -86,6 +99,7 @@ public class Shooter extends Subsystem {
     	
     	//TODO: delete
     	SmartDashboard.putNumber("Shooter Speed", shooterCounter.getRate());
+    	SmartDashboard.putNumber("Shooter Speed custom", getShooterSpeed());
     }
 }
 
