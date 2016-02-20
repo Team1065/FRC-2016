@@ -23,6 +23,7 @@ public class Shooter extends Subsystem {
     
     public Shooter(){
     	shooterMotor = new Talon(RobotMap.SHOOTER_MOTOR_PORT);
+    	shooterMotor.setInverted(true);
     	shooterCounter = new Counter(RobotMap.SHOOTER_COUNTER_PORT);
     	shooterCounter.setDistancePerPulse(.5 * 60);//.5 revolution per pulse. 60 to transform seconds to minutes
     	shooterCounter.setPIDSourceType(PIDSourceType.kRate);
