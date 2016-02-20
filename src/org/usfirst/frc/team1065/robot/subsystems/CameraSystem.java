@@ -18,8 +18,9 @@ public class CameraSystem extends Subsystem{
     Image frame;
     
     public CameraSystem(){
-    
+    	
     	frame = NIVision.imaqCreateImage(NIVision.ImageType.IMAGE_RGB, 0);
+    	//TODO: make it safe in case the cameras are not connected
         sessionfront = NIVision.IMAQdxOpenCamera(RobotMap.FRONT_CAM, NIVision.IMAQdxCameraControlMode.CameraControlModeController);
         sessionback = NIVision.IMAQdxOpenCamera(RobotMap.BACK_CAM, NIVision.IMAQdxCameraControlMode.CameraControlModeController);
         currSession = sessionfront;

@@ -23,18 +23,18 @@ public class RobotMap {
     
     //Shooter RPM values
     public static final double SHOOTER_RPM_0 = 0.0,
-    						   SHOOTER_RPM_1 = 1000.0,
-    						   SHOOTER_RPM_2 = 2000.0,
-    						   SHOOTER_RPM_3 = 3000.0,
-    						   SHOOTER_RPM_4 = 4000.0,
-    						   SHOOTER_RPM_5 = 6000.0;
+    						   SHOOTER_RPM_1 = 3500.0,
+    						   SHOOTER_RPM_2 = 4000.0,
+    						   SHOOTER_RPM_3 = 4500.0,
+    						   SHOOTER_RPM_4 = 5000.0,
+    						   SHOOTER_RPM_5 = 5500.0;
     
     //Shooter Voltage values
     public static final double SHOOTER_VOLT_0 = 0.0,
-    						   SHOOTER_VOLT_1 = 0.2,
-    						   SHOOTER_VOLT_2 = 0.4,
-    						   SHOOTER_VOLT_3 = 0.6,
-    						   SHOOTER_VOLT_4 = 0.8,
+    						   SHOOTER_VOLT_1 = 0.6,
+    						   SHOOTER_VOLT_2 = 0.7,
+    						   SHOOTER_VOLT_3 = 0.8,
+    						   SHOOTER_VOLT_4 = 0.9,
     						   SHOOTER_VOLT_5 = 1.0;
     
     //PWM Ports

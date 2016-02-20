@@ -55,7 +55,7 @@ public class OI {
     }
     
     public boolean getShooterOverride(){
-    	return enhancedDS.getRawButton(RobotMap.DRIVE_CONTROL_OVERRIDE);
+    	return enhancedDS.getRawButton(RobotMap.SHOOTER_CONTROLLER_OVERRIDE);
     }
     
     public double getShooterDesiredSpeed(){

@@ -1,6 +1,7 @@
 package org.usfirst.frc.team1065.robot.subsystems;
 
 import org.usfirst.frc.team1065.robot.RobotMap;
+import org.usfirst.frc.team1065.robot.commands.ManualShooterControl;
 
 import edu.wpi.first.wpilibj.Counter;
 import edu.wpi.first.wpilibj.PIDController;
@@ -27,13 +28,13 @@ public class Shooter extends Subsystem {
     	shooterCounter = new Counter(RobotMap.SHOOTER_COUNTER_PORT);
     	shooterCounter.setDistancePerPulse(.5 * 60);//.5 revolution per pulse. 60 to transform seconds to minutes
     	shooterCounter.setPIDSourceType(PIDSourceType.kRate);
-    	shooterCounter.setSamplesToAverage(10);
+    	shooterCounter.setSamplesToAverage(5);
     	shooterCounter.setSemiPeriodMode(true);
     	
-    	ratePIDPTerm = 100.0;//Making P very high so it behaves as a bang bang Controller
+    	ratePIDPTerm = 1.0;//Making P very high so it behaves as a bang bang Controller
     	ratePIDITerm = 0.0;
     	ratePIDDTerm = 0.0;
-    	ratePIDPeriod = 0.01;//10 ms, might want to make it 5 ms or 20 ms depending on the performance and CPU usage
+    	ratePIDPeriod = 0.005;//5 ms
     	
     	shooterController = new PIDController(ratePIDPTerm,ratePIDITerm, ratePIDDTerm, shooterCounter, shooterMotor, ratePIDPeriod);
     	shooterController.setOutputRange(0, 1.0);//don't allow reverse so that we can behave as a bang bang controller
@@ -46,7 +47,7 @@ public class Shooter extends Subsystem {
 
     public void initDefaultCommand() {
         // Set the default command for a subsystem here.
-        //setDefaultCommand(new MySpecialCommand());
+        setDefaultCommand(new ManualShooterControl());
     }
     
     public void enablePIDController(){
@@ -68,6 +69,10 @@ public class Shooter extends Subsystem {
     	else{
     		return true;
     	}
+    }
+    
+    public double getCounterRate(){
+    	return shooterCounter.getRate();
     }
     
     public void set(double speed){

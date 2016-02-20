@@ -43,7 +43,7 @@ public class Robot extends IterativeRobot {
 		intake = new Intake();
 		shooter = new Shooter();
 		lighting = new Lighting();
-		camera = new CameraSystem();
+		//camera = new CameraSystem();
 		
 		positionChooser = new SendableChooser();
 		positionChooser.addDefault("Far Left", StartingPosition.FarLeft);
@@ -53,6 +53,7 @@ public class Robot extends IterativeRobot {
 		positionChooser.addObject("Far Right", StartingPosition.FarRight);
         SmartDashboard.putData("Position Chooser", positionChooser);
 		
+        obstacleChooser = new SendableChooser();
         obstacleChooser.addDefault("Portcullis (Lift Gate)", Obstacle.LiftGate);
         obstacleChooser.addObject("Cheval de Frise (Seesaw)", Obstacle.Seesaw);
         obstacleChooser.addObject("Moat", Obstacle.Moat);
@@ -64,6 +65,7 @@ public class Robot extends IterativeRobot {
         obstacleChooser.addObject("Low Bar", Obstacle.LowBar);
         SmartDashboard.putData("Obstacle Chooser", obstacleChooser);
 		
+        commandChooser = new SendableChooser();
         commandChooser.addDefault("Reach", new AutoReach());
         commandChooser.addObject("Cross", new AutoCross());
         commandChooser.addObject("Cross Back", new AutoCrossBack());
