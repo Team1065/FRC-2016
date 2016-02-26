@@ -13,21 +13,22 @@ public class RobotMap {
     public static final double DRIVE_TOP_SPEED = 140.0,// inches per second TODO: change
 							   DRIVE_WHEEL_DIAMETER = 7.65,
 							   DRIVE_ENCODERS_COUNTS_PER_REV = 360,
-	    					   INTAKE_IN_SPEED = 1.0,
+	    					   INTAKE_IN_SPEED = 0.8,
 	    					   INTAKE_OUT_SPEED = 1.0,
-	    					   JOYSTICK_DEADBAND = 0.1,
-	    					   QUEUING_UP_SPEED = 1.0,
+	    					   JOYSTICK_DEADBAND = 0.18,
+	    					   QUEUING_UP_SPEED = 0.6,
+	    					   QUEUING_SHOOTING_SPEED =1.0,
 	    					   QUEUING_DOWN_SPEED = 1.0,
 	    					   DRIVE_STRAIGHT_BAND_PERCENTAGE = 0.15,
 	    					   SHOOTER_TOLERANCE = 100;//if we are within 100 rpm we are on target
     
     //Shooter RPM values
     public static final double SHOOTER_RPM_0 = 0.0,
-    						   SHOOTER_RPM_1 = 3500.0,
-    						   SHOOTER_RPM_2 = 4000.0,
+    						   SHOOTER_RPM_1 = 4300.0,
+    						   SHOOTER_RPM_2 = 4400.0,
     						   SHOOTER_RPM_3 = 4500.0,
-    						   SHOOTER_RPM_4 = 5000.0,
-    						   SHOOTER_RPM_5 = 5500.0;
+    						   SHOOTER_RPM_4 = 4600.0,
+    						   SHOOTER_RPM_5 = 4700.0;
     
     //Shooter Voltage values
     public static final double SHOOTER_VOLT_0 = 0.0,

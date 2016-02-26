@@ -24,22 +24,22 @@ public class Shooter extends Subsystem {
     private static double ratePIDPTerm, ratePIDITerm, ratePIDDTerm, ratePIDPeriod;
     private double prevCount, prevTime;
     
-    public Shooter(){
+    public Shooter(){  	
     	shooterMotor = new VictorSP(RobotMap.SHOOTER_MOTOR_PORT);
     	shooterMotor.setInverted(true);
     	shooterCounter = new Counter(RobotMap.SHOOTER_COUNTER_PORT);
-    	shooterCounter.setDistancePerPulse(.5 * 60);//.5 revolution per pulse. 60 to transform seconds to minutes
+    	shooterCounter.setDistancePerPulse(1/4 * 60);//4 counts per revolution. 60 to transform seconds to minutes
     	shooterCounter.setPIDSourceType(PIDSourceType.kRate);
-    	shooterCounter.setSamplesToAverage(5);//TODO: tune to try to filter rate better
+    	shooterCounter.setSamplesToAverage(4);//TODO: tune to try to filter rate better
     	shooterCounter.setSemiPeriodMode(true); 
     	
     	ratePIDPTerm = 1.0;//Making P very high so it behaves as a bang bang Controller
     	ratePIDITerm = 0.0;
     	ratePIDDTerm = 0.0;
-    	ratePIDPeriod = 0.005;//5 ms
+    	ratePIDPeriod = 0.01;//10 ms
     	
     	shooterController = new PIDController(ratePIDPTerm,ratePIDITerm, ratePIDDTerm, shooterCounter, shooterMotor, ratePIDPeriod);
-    	shooterController.setOutputRange(0, 1.0);//don't allow reverse so that we can behave as a bang bang controller
+    	shooterController.setOutputRange(0, 1);//don't allow reverse so that we can behave as a bang bang controller
     	shooterController.setAbsoluteTolerance(RobotMap.SHOOTER_TOLERANCE);
     	
     	LiveWindow.addActuator("Shooter", "Motor", shooterMotor);
@@ -77,17 +77,6 @@ public class Shooter extends Subsystem {
     	return shooterCounter.getRate();
     }
     
-    public double getShooterSpeed(){
-    	double curntTime = System.currentTimeMillis();
-    	double deltaTime = curntTime - prevTime;
-    	prevTime = curntTime;
-    	double curntCount = shooterCounter.get();
-    	double deltaCount = curntCount - prevCount;
-    	prevCount = curntCount;
-    	//TODO: if this works better we might want to also add a ringbuffer to filter the values
-    	return ((deltaCount/deltaTime)*1000*60)/2;
-    }
-    
     public void set(double speed){
     	//check if we should be setting the motor or the controller
     	if(shooterController.isEnabled()){
@@ -99,8 +88,6 @@ public class Shooter extends Subsystem {
     	
     	//TODO: delete
     	SmartDashboard.putNumber("Shooter Speed", shooterCounter.getRate());
-    	SmartDashboard.putNumber("Shooter period", shooterCounter.getPeriod());
-    	SmartDashboard.putNumber("Shooter Speed custom", getShooterSpeed());
     }
 }
 
