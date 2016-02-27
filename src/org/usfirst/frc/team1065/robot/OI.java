@@ -58,6 +58,10 @@ public class OI {
     	return enhancedDS.getRawButton(RobotMap.SHOOTER_CONTROLLER_OVERRIDE);
     }
     
+    public boolean getObstacleManipolatorSwitch(){
+    	return enhancedDS.getRawButton(RobotMap.OBSTACLE_MANIPULATOR_SWITCH_PORT);
+    }
+    
     public double getShooterDesiredSpeed(){
     	double speed;
 		double knobValue = enhancedDS.getRawAxis(RobotMap.SHOOTER_KNOB_PORT);

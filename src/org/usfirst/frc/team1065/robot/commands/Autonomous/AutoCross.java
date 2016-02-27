@@ -2,6 +2,7 @@ package org.usfirst.frc.team1065.robot.commands.Autonomous;
 
 import org.usfirst.frc.team1065.robot.Robot;
 import org.usfirst.frc.team1065.robot.RobotMap.Obstacle;
+import org.usfirst.frc.team1065.robot.commands.Autonomous.Utility.DriveForTime;
 import org.usfirst.frc.team1065.robot.commands.Autonomous.Utility.DriveToDistance;
 
 import edu.wpi.first.wpilibj.command.CommandGroup;
@@ -19,7 +20,7 @@ public class AutoCross extends CommandGroup {
     		case RockWall:
     		case Moat:
     		case Ramparts:
-    			addSequential(new DriveToDistance(0.5, 112, 10.0));
+    			addSequential(new DriveToDistance(0.5, 120, 10.0));
     			break;
     		case LiftGate:
     		case Seesaw:

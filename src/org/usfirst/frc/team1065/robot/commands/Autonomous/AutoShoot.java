@@ -3,6 +3,7 @@ package org.usfirst.frc.team1065.robot.commands.Autonomous;
 import org.usfirst.frc.team1065.robot.RobotMap.TargetGoal;
 import org.usfirst.frc.team1065.robot.RobotMap.TargetPosition;
 import org.usfirst.frc.team1065.robot.commands.Autonomous.Utility.AutoDriveToPosition;
+import org.usfirst.frc.team1065.robot.commands.Autonomous.Utility.DriveForTime;
 import org.usfirst.frc.team1065.robot.commands.Autonomous.Utility.DriveToDistance;
 import org.usfirst.frc.team1065.robot.commands.Autonomous.Utility.SetShooterSpeed;
 import org.usfirst.frc.team1065.robot.commands.Autonomous.Utility.ShootHigh;
@@ -20,11 +21,13 @@ public class AutoShoot extends CommandGroup {
     	addSequential(new AutoDriveToPosition(targetGoalPosition));
     	
     	if(targetGoal == TargetGoal.Low){
-    		addSequential(new DriveToDistance(.6, 12, 3));
+    		addSequential(new DriveToDistance(.6, 12, 3.0));
     		addSequential(new ShootLow(5.0));
     	}
     	else{
-    		addSequential(new SetShooterSpeed(3000));
+    		addSequential(new DriveToDistance(.6, 12, 3.0));
+    		addSequential(new SetShooterSpeed(4600));
+    		addSequential(new DriveForTime(0, 0, 1.0));
     		addSequential(new ShootHigh(5.0));
     	}
     	

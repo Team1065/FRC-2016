@@ -67,7 +67,7 @@ public class DriveTrain extends Subsystem {
     	straightPID = new PIDController(straightPIDPTerm, straightPIDITerm, straightPIDDTerm, navX, dummyStraight, PIDPeriod);
     	straightPID.setInputRange(-180.0f,  180.0f);
     	straightPID.setOutputRange(-0.5, 0.5);
-    	straightPID.setAbsoluteTolerance(3);
+    	straightPID.setAbsoluteTolerance(2);
     	straightPID.setContinuous(true);
     	straightPID.setSetpoint(0.0);
     	
@@ -99,8 +99,7 @@ public class DriveTrain extends Subsystem {
     	}
     	
     	//TODO: delete
-    	SmartDashboard.putNumber("IMU_TotalYaw", getAngle());
-    	SmartDashboard.putNumber("navX yaw", navX.getYaw());
+    	SmartDashboard.putNumber("Drive Angle", navX.getYaw());
     	SmartDashboard.putNumber("left speed", leftEncoder.getRate());
     	SmartDashboard.putNumber("right speed", rightEncoder.getRate());
     }

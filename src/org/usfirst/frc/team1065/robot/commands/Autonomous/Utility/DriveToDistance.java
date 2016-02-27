@@ -22,15 +22,14 @@ public class DriveToDistance extends Command {
     // Called just before this Command runs the first time
     protected void initialize() {
     	Robot.drive.resetEncoders();
-    	Robot.drive.resetAngle();
-    	Robot.drive.setAngle(0);
+    	Robot.drive.setAngle(Robot.drive.getAngle());
     	Robot.drive.enableStraightController();
     }
 
     // Called repeatedly when this Command is scheduled to run
     protected void execute() {
     	if(Math.abs(Robot.drive.getLeftEncoderDistance()) > distance-10){ //slow down 10 inches from the target
-    		speed = speed * 0.5;
+    		speed = speed * 0.65;
     	}
     	
     	Robot.drive.DriveStraight(speed);

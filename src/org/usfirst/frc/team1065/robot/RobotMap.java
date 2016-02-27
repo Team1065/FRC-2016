@@ -13,13 +13,13 @@ public class RobotMap {
     public static final double DRIVE_TOP_SPEED = 140.0,// inches per second TODO: change
 							   DRIVE_WHEEL_DIAMETER = 7.65,
 							   DRIVE_ENCODERS_COUNTS_PER_REV = 360,
-	    					   INTAKE_IN_SPEED = 0.8,
+	    					   INTAKE_IN_SPEED = 0.9,
 	    					   INTAKE_OUT_SPEED = 1.0,
-	    					   JOYSTICK_DEADBAND = 0.18,
-	    					   QUEUING_UP_SPEED = 0.6,
+	    					   JOYSTICK_DEADBAND = 0.05,
+	    					   QUEUING_UP_SPEED = 0.7,
 	    					   QUEUING_SHOOTING_SPEED =1.0,
 	    					   QUEUING_DOWN_SPEED = 1.0,
-	    					   DRIVE_STRAIGHT_BAND_PERCENTAGE = 0.15,
+	    					   DRIVE_STRAIGHT_BAND_PERCENTAGE = 0.2,
 	    					   SHOOTER_TOLERANCE = 100;//if we are within 100 rpm we are on target
     
     //Shooter RPM values
@@ -46,7 +46,8 @@ public class RobotMap {
 				  	    	SHOOTER_MOTOR_PORT = 4;
     //PCM Ports
     public static final int INTAKE_LED_PORT = 0,
-	  	    				SHOOTER_LED_PORT = 1;
+	  	    				SHOOTER_LED_PORT = 1,
+	  	    				OBSTACLE_MANIPULATOR_PORT = 2;
     //Digital Ports
     public static final int LEFT_DRIVE_ENCODER_PORT_A = 0,
 	    				    LEFT_DRIVE_ENCODER_PORT_B = 1,
@@ -63,6 +64,7 @@ public class RobotMap {
 						    INTAKE_IN_PORT = 4,//Digital
 						    INTAKE_OUT_PORT = 5,//Digital
 						    SHOOTER_CONTROLLER_OVERRIDE = 9,//Digital
+						    OBSTACLE_MANIPULATOR_SWITCH_PORT = 1,//digital
 				    		SHOOTER_KNOB_PORT = 0;//Analog
     
     public static final double SHOOTER_KNOB_POS_0 = 0.000,

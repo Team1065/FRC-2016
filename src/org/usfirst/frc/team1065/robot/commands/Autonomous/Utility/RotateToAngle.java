@@ -30,7 +30,7 @@ public class RotateToAngle extends Command {
     	double currentAngle = Robot.drive.getAngle();
     	//slow down 10 degrees from the target
     	if(currentAngle > angle-10 && currentAngle < angle+10){
-    		speed = speed * 0.5;
+    		speed = speed * 0.65;
     	}
     	
     	//direction of rotation decided based on target angle

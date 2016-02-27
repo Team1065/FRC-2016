@@ -7,12 +7,14 @@ import org.usfirst.frc.team1065.robot.RobotMap.TargetGoal;
 import org.usfirst.frc.team1065.robot.RobotMap.TargetPosition;
 import org.usfirst.frc.team1065.robot.commands.Autonomous.AutoCross;
 import org.usfirst.frc.team1065.robot.commands.Autonomous.AutoCrossBack;
+import org.usfirst.frc.team1065.robot.commands.Autonomous.AutoCrossDelayAndFollow;
 import org.usfirst.frc.team1065.robot.commands.Autonomous.AutoReach;
 import org.usfirst.frc.team1065.robot.commands.Autonomous.AutoShoot;
 import org.usfirst.frc.team1065.robot.subsystems.CameraSystem;
 import org.usfirst.frc.team1065.robot.subsystems.DriveTrain;
 import org.usfirst.frc.team1065.robot.subsystems.Intake;
 import org.usfirst.frc.team1065.robot.subsystems.Lighting;
+import org.usfirst.frc.team1065.robot.subsystems.ObstacleManipulator;
 import org.usfirst.frc.team1065.robot.subsystems.Shooter;
 
 import edu.wpi.first.wpilibj.IterativeRobot;
@@ -29,6 +31,7 @@ public class Robot extends IterativeRobot {
 	public static DriveTrain drive;
 	public static Intake intake;
 	public static Shooter shooter;
+	public static ObstacleManipulator manipulator;
 	public static Lighting lighting;
 	public static CameraSystem camera;
 	
@@ -42,8 +45,9 @@ public class Robot extends IterativeRobot {
 		drive = new DriveTrain();
 		intake = new Intake();
 		shooter = new Shooter();
+		manipulator = new ObstacleManipulator();
 		lighting = new Lighting();
-		//camera = new CameraSystem();
+		camera = new CameraSystem();
 		
 		positionChooser = new SendableChooser();
 		positionChooser.addDefault("Far Left", StartingPosition.FarLeft);
@@ -68,6 +72,7 @@ public class Robot extends IterativeRobot {
         commandChooser = new SendableChooser();
         commandChooser.addDefault("Reach", new AutoReach());
         commandChooser.addObject("Cross", new AutoCross());
+        commandChooser.addObject("Cross Follow", new AutoCrossDelayAndFollow());
         commandChooser.addObject("Cross Back", new AutoCrossBack());
         commandChooser.addObject("Shoot High Left", new AutoShoot(TargetGoal.High, TargetPosition.Left));
         commandChooser.addObject("Shoot High Center", new AutoShoot(TargetGoal.High, TargetPosition.Center));
@@ -82,6 +87,8 @@ public class Robot extends IterativeRobot {
 	}
 
     public void autonomousInit() {
+    	drive.resetAngle();
+    	
     	if(oi.getDriveOverride()){
     		drive.disableRateControllers();
     	}
@@ -110,6 +117,8 @@ public class Robot extends IterativeRobot {
     	if (autonomousCommand != null){
     		autonomousCommand.cancel();
     	}
+    	
+    	drive.resetAngle();
     }
 
     public void disabledInit(){

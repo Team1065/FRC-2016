@@ -1,4 +1,4 @@
-package org.usfirst.frc.team1065.robot.commands.Autonomous.Utility;
+package org.usfirst.frc.team1065.robot.commands;
 
 import org.usfirst.frc.team1065.robot.Robot;
 
@@ -7,25 +7,24 @@ import edu.wpi.first.wpilibj.command.Command;
 /**
  *
  */
-public class ResetDriveAngle extends Command {
+public class ManualObstacleManipulatorControl extends Command {
 
-    public ResetDriveAngle() {
-        requires(Robot.drive);
+    public ManualObstacleManipulatorControl() {
+        requires(Robot.manipulator);
     }
 
     // Called just before this Command runs the first time
     protected void initialize() {
-    	Robot.drive.resetAngle();
-    	Robot.drive.setAngle(0);
     }
 
     // Called repeatedly when this Command is scheduled to run
     protected void execute() {
+    	Robot.manipulator.setActuator(Robot.oi.getObstacleManipolatorSwitch());
     }
 
     // Make this return true when this Command no longer needs to run execute()
     protected boolean isFinished() {
-        return true;
+        return false;
     }
 
     // Called once after isFinished returns true
