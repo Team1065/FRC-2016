@@ -14,9 +14,9 @@ import edu.wpi.first.wpilibj.command.CommandGroup;
 public class AutoCrossDelayAndFollow extends CommandGroup {
     
     public  AutoCrossDelayAndFollow() {
-    	addSequential(new DriveForTime(0, 0, 5.0));
-    	addSequential(new DriveToDistance(0.5, 30, 10.0));
-    	addSequential(new RotateToAngle(0.4, 90, 10.0));
+    	addSequential(new DriveForTime(0, 0, 3.0));
+    	addSequential(new DriveToDistance(0.4, 30, 10.0));
+    	addSequential(new RotateToAngle(0.6, 90, 10.0));
     	addSequential(new AutoCross());
     }
 }

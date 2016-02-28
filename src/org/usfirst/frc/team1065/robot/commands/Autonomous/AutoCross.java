@@ -20,7 +20,7 @@ public class AutoCross extends CommandGroup {
     		case RockWall:
     		case Moat:
     		case Ramparts:
-    			addSequential(new DriveToDistance(0.5, 120, 10.0));
+    			addSequential(new DriveToDistance(0.5, 135, 15.0));
     			break;
     		case LiftGate:
     		case Seesaw:

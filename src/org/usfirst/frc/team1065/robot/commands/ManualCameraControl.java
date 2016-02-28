@@ -21,11 +21,7 @@ public class ManualCameraControl extends Command {
 		 boolean leftTrig = Robot.oi.getLeftJoystickTrigger();
 		 
 		 if(leftTrig){
-			 Robot.camera.switchToFront();
-			 
-		 }
-		 else{
-			 Robot.camera.switchToBack();
+			 Robot.camera.switchCamera(); 
 		 }
 		 
 		 Robot.camera.sendImageToDS();

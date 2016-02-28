@@ -58,7 +58,8 @@ public class Robot extends IterativeRobot {
         SmartDashboard.putData("Position Chooser", positionChooser);
 		
         obstacleChooser = new SendableChooser();
-        obstacleChooser.addDefault("Portcullis (Lift Gate)", Obstacle.LiftGate);
+        obstacleChooser.addDefault("Low Bar", Obstacle.LowBar);
+        obstacleChooser.addObject("Portcullis (Lift Gate)", Obstacle.LiftGate);
         obstacleChooser.addObject("Cheval de Frise (Seesaw)", Obstacle.Seesaw);
         obstacleChooser.addObject("Moat", Obstacle.Moat);
         obstacleChooser.addObject("Ramparts", Obstacle.Ramparts);
@@ -66,7 +67,6 @@ public class Robot extends IterativeRobot {
         obstacleChooser.addObject("Sally Port (Door)", Obstacle.Door);
         obstacleChooser.addObject("Rock Wall", Obstacle.RockWall);
         obstacleChooser.addObject("Rough Terrain", Obstacle.RoughTerrian);
-        obstacleChooser.addObject("Low Bar", Obstacle.LowBar);
         SmartDashboard.putData("Obstacle Chooser", obstacleChooser);
 		
         commandChooser = new SendableChooser();

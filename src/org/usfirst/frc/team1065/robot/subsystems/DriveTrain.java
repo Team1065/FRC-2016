@@ -42,11 +42,11 @@ public class DriveTrain extends Subsystem {
     	rightTalon = new Talon(RobotMap.RIGHT_DRIVE_MOTOR_PORT);
     	rightTalon.setInverted(true);
     	
-    	ratePIDPTerm = 0.0007;
+    	ratePIDPTerm = 0.0005;
     	ratePIDITerm = 0.0;
     	ratePIDDTerm = 0.0;
     	
-    	straightPIDPTerm = 0.02;
+    	straightPIDPTerm = 0.055;
     	straightPIDITerm = 0.0;
     	straightPIDDTerm = 0.0;
     	

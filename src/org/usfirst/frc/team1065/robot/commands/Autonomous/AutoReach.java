@@ -10,6 +10,6 @@ import edu.wpi.first.wpilibj.command.CommandGroup;
 public class AutoReach extends CommandGroup {
     
     public  AutoReach() {
-        addSequential(new DriveToDistance(0.5, 50, 5.0));
+        addSequential(new DriveToDistance(0.4, 50, 15.0));
     }
 }

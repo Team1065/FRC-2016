@@ -12,7 +12,7 @@ public class AutoCrossBack extends CommandGroup {
     
     public  AutoCrossBack() {
         addSequential(new AutoCross());
-        addSequential(new RotateToAngle(.4,179,5.0));
+        addSequential(new RotateToAngle(.6,179,5.0));
         addSequential(new AutoCross());
     }
 }

@@ -28,21 +28,30 @@ public class CameraSystem extends Subsystem{
     }
     
 	protected void initDefaultCommand() {
-		setDefaultCommand(new ManualCameraControl());
-		
+		setDefaultCommand(new ManualCameraControl());	
+	}
+	
+	public void switchCamera(){
+		if(currSession == sessionfront){
+			switchToBack();
+		}
+		else{
+			switchToFront();
+		}
 	}
 	
 	public void switchToBack(){
 		NIVision.IMAQdxStopAcquisition(currSession);
 		currSession = sessionback;
         NIVision.IMAQdxConfigureGrab(currSession);
-		}
+	}
 	
 	public void switchToFront(){
 		NIVision.IMAQdxStopAcquisition(currSession);
 		currSession = sessionfront;
 		NIVision.IMAQdxConfigureGrab(currSession);
-      	}
+	}
+	
 	public void sendImageToDS(){
 		NIVision.IMAQdxGrab(currSession, frame, 1);
         CameraServer.getInstance().setImage(frame);
