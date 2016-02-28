@@ -1,4 +1,4 @@
-package org.usfirst.frc.team1065.robot.commands;
+package org.usfirst.frc.team1065.robot.commands.Autonomous.Utility;
 
 import org.usfirst.frc.team1065.robot.Robot;
 
@@ -7,10 +7,11 @@ import edu.wpi.first.wpilibj.command.Command;
 /**
  *
  */
-public class ManualObstacleManipulatorControl extends Command {
+public class ExtendManipulator extends Command {
 
-    public ManualObstacleManipulatorControl() {
+    public ExtendManipulator(double time) {
         requires(Robot.manipulator);
+    	this.setTimeout(time);
     }
 
     // Called just before this Command runs the first time
@@ -19,12 +20,12 @@ public class ManualObstacleManipulatorControl extends Command {
 
     // Called repeatedly when this Command is scheduled to run
     protected void execute() {
-    	Robot.manipulator.setActuators(Robot.oi.getObstacleManipolatorSwitch());
+    	Robot.manipulator.setActuators(true);
     }
 
     // Make this return true when this Command no longer needs to run execute()
     protected boolean isFinished() {
-        return false;
+        return this.isTimedOut();
     }
 
     // Called once after isFinished returns true
@@ -34,5 +35,6 @@ public class ManualObstacleManipulatorControl extends Command {
     // Called when another command which requires one or more of the same
     // subsystems is scheduled to run
     protected void interrupted() {
+    	end();
     }
 }

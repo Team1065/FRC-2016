@@ -47,7 +47,8 @@ public class RobotMap {
     //PCM Ports
     public static final int INTAKE_LED_PORT = 0,
 	  	    				SHOOTER_LED_PORT = 1,
-	  	    				OBSTACLE_MANIPULATOR_PORT = 2;
+	  	    				OBSTACLE_MANIPULATOR_LEFT_PORT = 2,
+	  	    				OBSTACLE_MANIPULATOR_RIGHT_PORT = 3;
     //Digital Ports
     public static final int LEFT_DRIVE_ENCODER_PORT_A = 0,
 	    				    LEFT_DRIVE_ENCODER_PORT_B = 1,

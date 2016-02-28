@@ -98,10 +98,10 @@ public class DriveTrain extends Subsystem {
         	rightTalon.set(rightSpeed);
     	}
     	
-    	//TODO: delete
+    	//TODO: remove
     	SmartDashboard.putNumber("Drive Angle", navX.getYaw());
-    	SmartDashboard.putNumber("left speed", leftEncoder.getRate());
-    	SmartDashboard.putNumber("right speed", rightEncoder.getRate());
+    	//SmartDashboard.putNumber("left speed", leftEncoder.getRate());
+    	//SmartDashboard.putNumber("right speed", rightEncoder.getRate());
     }
     
     public void DriveStraight(double speed){
