@@ -6,8 +6,10 @@ import org.usfirst.frc.team1065.robot.commands.ManualCameraControl;
 
 import com.ni.vision.NIVision;
 import com.ni.vision.NIVision.Image;
+
 import edu.wpi.first.wpilibj.CameraServer;
 import edu.wpi.first.wpilibj.command.Subsystem;
+import edu.wpi.first.wpilibj.vision.USBCamera;
 
 
 public class CameraSystem extends Subsystem{
@@ -16,6 +18,7 @@ public class CameraSystem extends Subsystem{
     int sessionfront;
     int sessionback;
     Image frame;
+    USBCamera cam0, cam1;
     
     public CameraSystem(){
     	
@@ -25,6 +28,21 @@ public class CameraSystem extends Subsystem{
         sessionback = NIVision.IMAQdxOpenCamera(RobotMap.BACK_CAM, NIVision.IMAQdxCameraControlMode.CameraControlModeController);
         currSession = sessionfront;
         NIVision.IMAQdxConfigureGrab(currSession);
+        //CameraServer.getInstance().setQuality(25);//add and tune
+        
+        //test and tune
+        cam0 = new USBCamera(RobotMap.FRONT_CAM);
+        cam1 = new USBCamera(RobotMap.FRONT_CAM);
+        
+        cam0.setBrightness(0);//tune
+        cam0.setExposureAuto();//might want to use manual one
+        cam0.setFPS(30);
+        cam0.setSize(320, 240);
+        
+        cam1.setBrightness(0);//tune
+        cam1.setExposureAuto();//might want to use manual one
+        cam1.setFPS(30);
+        cam1.setSize(320, 240);
     }
     
 	protected void initDefaultCommand() {
