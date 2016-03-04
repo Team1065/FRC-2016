@@ -38,11 +38,13 @@ public class CameraSystem extends Subsystem{
         cam0.setExposureAuto();//might want to use manual one
         cam0.setFPS(30);
         cam0.setSize(320, 240);
+        cam0.updateSettings();
         
         cam1.setBrightness(0);//tune
         cam1.setExposureAuto();//might want to use manual one
         cam1.setFPS(30);
         cam1.setSize(320, 240);
+        cam1.updateSettings();
     }
     
 	protected void initDefaultCommand() {

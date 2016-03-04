@@ -27,16 +27,34 @@ public class Shooter extends Subsystem {
     public Shooter(){  	
     	shooterMotor = new VictorSP(RobotMap.SHOOTER_MOTOR_PORT);
     	shooterMotor.setInverted(true);
+    	//Banner
     	shooterCounter = new Counter(RobotMap.SHOOTER_COUNTER_PORT);
     	shooterCounter.setDistancePerPulse(1/4 * 60);//4 counts per revolution. 60 to transform seconds to minutes
     	shooterCounter.setPIDSourceType(PIDSourceType.kRate);
-    	shooterCounter.setSamplesToAverage(4);//TODO: tune to try to filter rate better
+    	shooterCounter.setSamplesToAverage(4);////5ms (1), 10ms (2), 20ms (5)
     	shooterCounter.setSemiPeriodMode(true); 
     	
-    	ratePIDPTerm = 1.0;//Making P very high so it behaves as a bang bang Controller
+    	ratePIDPTerm = 100.0;//Making P very high so it behaves as a bang bang Controller
     	ratePIDITerm = 0.0;
     	ratePIDDTerm = 0.0;
     	ratePIDPeriod = 0.01;//10 ms
+    	
+    	//Quad Encoder
+    	/*
+    	shooterCounter = new Counter(RobotMap.SHOOTER_ENCODER_PORT);
+    	shooterCounter.setSemiPeriodMode(false); 
+    	shooterCounter.setDistancePerPulse(1/360 * 60);
+    	shooterCounter.setPIDSourceType(PIDSourceType.kRate);
+    	shooterCounter.setSamplesToAverage(30);//5ms (30-120), 10ms (60-240)
+    	shooterCounter.setSemiPeriodMode(true); 
+    	
+    	ratePIDPTerm = 100.0;//Making P very high so it behaves as a bang bang Controller
+    	ratePIDITerm = 0.0;
+    	ratePIDDTerm = 0.0;
+    	ratePIDPeriod = 0.005;//5 ms
+    	 */
+    	
+    	
     	
     	shooterController = new PIDController(ratePIDPTerm,ratePIDITerm, ratePIDDTerm, shooterCounter, shooterMotor, ratePIDPeriod);
     	shooterController.setOutputRange(0, 1);//don't allow reverse so that we can behave as a bang bang controller
