@@ -21,24 +21,24 @@ public class RotateToAngle extends Command {
     // Called just before this Command runs the first time
     protected void initialize() {
     	Robot.drive.setAngle(angle);
-    	//TODO:might need this
-    	//Robot.drive.enableStraightController();
+    	Robot.drive.enableStraightController();
     }
 
     // Called repeatedly when this Command is scheduled to run
     protected void execute() {
     	double currentAngle = Robot.drive.getAngle();
+    	double motorSpeed = speed;
     	//slow down 10 degrees from the target
     	if(currentAngle > angle-10 && currentAngle < angle+10){
-    		speed = speed * 0.65;
+    		motorSpeed = motorSpeed * 0.9;
     	}
     	
     	//direction of rotation decided based on target angle
     	if(Robot.drive.getAngle() > angle){
-    		speed = speed * -1;
+    		motorSpeed = motorSpeed * -1;
     	}
     	
-    	Robot.drive.tankDrive(speed, -speed);
+    	Robot.drive.tankDrive(motorSpeed, -motorSpeed);
     }
 
     // Make this return true when this Command no longer needs to run execute()
@@ -48,8 +48,7 @@ public class RotateToAngle extends Command {
 
     // Called once after isFinished returns true
     protected void end() {
-    	//TODO:might need this
-    	//Robot.drive.disableStraightControllers();
+    	Robot.drive.disableStraightControllers();
     	Robot.drive.tankDrive(0, 0);
     }
 

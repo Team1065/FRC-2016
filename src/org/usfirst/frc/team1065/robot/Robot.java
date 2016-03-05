@@ -10,6 +10,7 @@ import org.usfirst.frc.team1065.robot.commands.Autonomous.AutoCrossBack;
 import org.usfirst.frc.team1065.robot.commands.Autonomous.AutoCrossDelayAndFollow;
 import org.usfirst.frc.team1065.robot.commands.Autonomous.AutoReach;
 import org.usfirst.frc.team1065.robot.commands.Autonomous.AutoShoot;
+import org.usfirst.frc.team1065.robot.commands.Autonomous.AutoShootDelayAndFollow;
 import org.usfirst.frc.team1065.robot.subsystems.CameraSystem;
 import org.usfirst.frc.team1065.robot.subsystems.DriveTrain;
 import org.usfirst.frc.team1065.robot.subsystems.Intake;
@@ -47,7 +48,7 @@ public class Robot extends IterativeRobot {
 		shooter = new Shooter();
 		manipulator = new ObstacleManipulator();
 		lighting = new Lighting();
-		camera = new CameraSystem();
+		//camera = new CameraSystem();
 		
 		positionChooser = new SendableChooser();
 		positionChooser.addDefault("Far Left", StartingPosition.FarLeft);
@@ -73,6 +74,8 @@ public class Robot extends IterativeRobot {
         commandChooser.addDefault("Reach", new AutoReach());
         commandChooser.addObject("Cross", new AutoCross());
         commandChooser.addObject("Cross Follow", new AutoCrossDelayAndFollow());
+        commandChooser.addObject("Cross Follow Shoot Low Left", new AutoShootDelayAndFollow(TargetGoal.Low, TargetPosition.Left));
+        commandChooser.addObject("Cross Follow Shoot high Left", new AutoShootDelayAndFollow(TargetGoal.High, TargetPosition.Left));
         commandChooser.addObject("Cross Back", new AutoCrossBack());
         commandChooser.addObject("Shoot High Left", new AutoShoot(TargetGoal.High, TargetPosition.Left));
         commandChooser.addObject("Shoot High Center", new AutoShoot(TargetGoal.High, TargetPosition.Center));
@@ -88,6 +91,7 @@ public class Robot extends IterativeRobot {
 
     public void autonomousInit() {
     	drive.resetAngle();
+    	drive.resetEncoders();
     	
     	if(oi.getDriveOverride()){
     		drive.disableRateControllers();

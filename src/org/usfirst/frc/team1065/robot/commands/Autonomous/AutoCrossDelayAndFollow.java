@@ -20,10 +20,10 @@ public class AutoCrossDelayAndFollow extends CommandGroup {
     	
     	Obstacle obstacle = (Obstacle) Robot.obstacleChooser.getSelected();
         if(obstacle != Obstacle.LiftGate && obstacle != Obstacle.Seesaw){
-        	addSequential(new RotateToAngle(0.6, 90, 10.0));
+        	addSequential(new RotateToAngle(0.4, 90, 10.0));
         }
         else{
-        	addSequential(new RotateToAngle(0.6, -90, 10.0));
+        	addSequential(new RotateToAngle(0.4, -90, 10.0));
         }
         
         addSequential(new ResetDriveAngle());

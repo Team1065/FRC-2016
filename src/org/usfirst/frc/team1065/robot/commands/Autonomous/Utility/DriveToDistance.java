@@ -29,7 +29,7 @@ public class DriveToDistance extends Command {
     // Called repeatedly when this Command is scheduled to run
     protected void execute() {
     	if(Math.abs(Robot.drive.getLeftEncoderDistance()) > distance-10){ //slow down 10 inches from the target
-    		speed = speed * 0.65;
+    		speed = speed * 0.75;
     	}
     	
     	Robot.drive.DriveStraight(speed);

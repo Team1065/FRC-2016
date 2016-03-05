@@ -24,7 +24,7 @@ public class ManualBoulderControl extends Command {
     	if(Robot.oi.getIntakeOutSwitch()){
     		Robot.intake.setIntakeOut(RobotMap.INTAKE_OUT_SPEED);
     		
-    		if(Robot.oi.getRightJoystickTrigger()){
+    		if(Robot.oi.getRightJoystickTrigger() && Robot.oi.getRightJoystickTop()){
     			Robot.intake.setQueuingDown(RobotMap.QUEUING_DOWN_SPEED);
     		}
     		else{
