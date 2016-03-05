@@ -20,6 +20,12 @@ public class ManualObstacleManipulatorControl extends Command {
     // Called repeatedly when this Command is scheduled to run
     protected void execute() {
     	Robot.manipulator.setActuators(Robot.oi.getObstacleManipolatorSwitch());
+    	if(Robot.shooter.isShooterOn()){
+    		Robot.manipulator.stopConpressor();
+    	}
+    	else{
+    		Robot.manipulator.startConpressor();
+    	}
     }
 
     // Make this return true when this Command no longer needs to run execute()

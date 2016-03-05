@@ -14,10 +14,10 @@ import edu.wpi.first.wpilibj.command.CommandGroup;
 /**
  *
  */
-public class AutoShoot extends CommandGroup {
+public class AutoShootDelayAndFollow extends CommandGroup {
     
-    public  AutoShoot(TargetGoal targetGoal, TargetPosition targetGoalPosition) {
-    	addSequential(new AutoCross());
+    public  AutoShootDelayAndFollow(TargetGoal targetGoal, TargetPosition targetGoalPosition) {
+    	addSequential(new AutoCrossDelayAndFollow());
     	addSequential(new AutoDriveToPosition(targetGoalPosition));
     	
     	if(targetGoal == TargetGoal.Low){

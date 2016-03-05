@@ -38,6 +38,10 @@ public class OI {
     	return rightJoystick.getTrigger();
     }
     
+    public boolean getRightJoystickTop(){
+    	return rightJoystick.getTop();
+    }
+    
     public boolean getLeftJoystickTrigger(){
     	return leftJoystick.getTrigger();
     }

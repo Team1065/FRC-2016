@@ -13,14 +13,13 @@ import edu.wpi.first.wpilibj.command.Subsystem;
 public class ObstacleManipulator extends Subsystem {
     
 	private Compressor compressor;
-	private Solenoid actuatorLeft, actuatorRight;
+	private Solenoid actuator;
 	
 	public ObstacleManipulator(){
 		compressor = new Compressor();
 		compressor.start();
 		
-		actuatorLeft = new Solenoid(RobotMap.OBSTACLE_MANIPULATOR_LEFT_PORT);
-		actuatorRight = new Solenoid(RobotMap.OBSTACLE_MANIPULATOR_RIGHT_PORT);
+		actuator = new Solenoid(RobotMap.OBSTACLE_MANIPULATOR_PORT);
 	}
 	
     public void initDefaultCommand() {
@@ -28,8 +27,19 @@ public class ObstacleManipulator extends Subsystem {
     }
     
     public void setActuators(boolean value){
-    	actuatorLeft.set(value);
-    	actuatorRight.set(value);
+    	actuator.set(value);
+    }
+    
+    public void stopConpressor(){
+    	if(compressor.enabled()){
+    		compressor.stop();
+    	}
+    }
+    
+    public void startConpressor(){
+    	if(!compressor.enabled()){
+    		compressor.start();
+    	}
     }
 }
 
