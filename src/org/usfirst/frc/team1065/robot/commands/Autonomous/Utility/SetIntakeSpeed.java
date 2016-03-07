@@ -1,16 +1,18 @@
-package org.usfirst.frc.team1065.robot.commands;
+package org.usfirst.frc.team1065.robot.commands.Autonomous.Utility;
 
 import org.usfirst.frc.team1065.robot.Robot;
+import org.usfirst.frc.team1065.robot.RobotMap;
 
 import edu.wpi.first.wpilibj.command.Command;
 
 /**
  *
  */
-public class ManualObstacleManipulatorControl extends Command {
+public class SetIntakeSpeed extends Command {
 
-    public ManualObstacleManipulatorControl() {
-        requires(Robot.manipulator);
+    public SetIntakeSpeed(double speed, double time) {
+    	requires(Robot.intake);
+    	this.setTimeout(time);
     }
 
     // Called just before this Command runs the first time
@@ -19,18 +21,12 @@ public class ManualObstacleManipulatorControl extends Command {
 
     // Called repeatedly when this Command is scheduled to run
     protected void execute() {
-    	Robot.manipulator.setActuators(!Robot.oi.getObstacleManipolatorSwitch());
-    	if(Robot.shooter.isShooterOn()){
-    		Robot.manipulator.stopConpressor();
-    	}
-    	else{
-    		Robot.manipulator.startConpressor();
-    	}
+    	Robot.intake.setIntakeOut(RobotMap.INTAKE_OUT_SPEED);
     }
 
     // Make this return true when this Command no longer needs to run execute()
     protected boolean isFinished() {
-        return false;
+        return this.isTimedOut();
     }
 
     // Called once after isFinished returns true
@@ -40,5 +36,6 @@ public class ManualObstacleManipulatorControl extends Command {
     // Called when another command which requires one or more of the same
     // subsystems is scheduled to run
     protected void interrupted() {
+    	end();
     }
 }

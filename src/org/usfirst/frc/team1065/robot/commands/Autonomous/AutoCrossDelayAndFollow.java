@@ -16,17 +16,18 @@ public class AutoCrossDelayAndFollow extends CommandGroup {
     
     public  AutoCrossDelayAndFollow() {
     	addSequential(new DriveForTime(0, 0, 3.0));
-    	addSequential(new DriveToDistance(0.4, 45, 10.0));
+    	addSequential(new DriveToDistance(0.4, 40, 10.0));
     	
     	Obstacle obstacle = (Obstacle) Robot.obstacleChooser.getSelected();
         if(obstacle != Obstacle.LiftGate && obstacle != Obstacle.Seesaw){
-        	addSequential(new RotateToAngle(0.4, 90, 10.0));
+        	addSequential(new RotateToAngle(0.45, 90, 10.0));
         }
         else{
-        	addSequential(new RotateToAngle(0.4, -90, 10.0));
+        	addSequential(new RotateToAngle(0.45, -90, 10.0));
         }
         
         addSequential(new ResetDriveAngle());
+        addSequential(new DriveForTime(0, 0, .5));
     	addSequential(new AutoCross());
     }
 }

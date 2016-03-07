@@ -48,7 +48,7 @@ public class Robot extends IterativeRobot {
 		shooter = new Shooter();
 		manipulator = new ObstacleManipulator();
 		lighting = new Lighting();
-		//camera = new CameraSystem();
+		camera = new CameraSystem();
 		
 		positionChooser = new SendableChooser();
 		positionChooser.addDefault("Far Left", StartingPosition.FarLeft);

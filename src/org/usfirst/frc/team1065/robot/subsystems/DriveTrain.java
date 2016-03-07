@@ -129,13 +129,13 @@ public class DriveTrain extends Subsystem {
 	}
 	
 	public void enableRateControllers(){
-    	if(!leftRatePID.isEnabled()){
+    	/*if(!leftRatePID.isEnabled()){
     		leftRatePID.enable();
     	}
     	
     	if(!rightRatePID.isEnabled()){
     		rightRatePID.enable();
-    	}
+    	}*/
     }
     
     public void disableRateControllers(){

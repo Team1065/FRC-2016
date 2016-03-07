@@ -11,6 +11,7 @@ public class ResetDriveAngle extends Command {
 
     public ResetDriveAngle() {
         requires(Robot.drive);
+        this.setTimeout(.1);
     }
 
     // Called just before this Command runs the first time
@@ -25,7 +26,7 @@ public class ResetDriveAngle extends Command {
 
     // Make this return true when this Command no longer needs to run execute()
     protected boolean isFinished() {
-        return true;
+        return this.isTimedOut();
     }
 
     // Called once after isFinished returns true
