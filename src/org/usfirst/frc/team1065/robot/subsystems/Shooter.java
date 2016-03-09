@@ -59,7 +59,7 @@ public class Shooter extends Subsystem {
     	
     	shooterController = new PIDController(ratePIDPTerm,ratePIDITerm, ratePIDDTerm, shooterCounter, shooterMotor, ratePIDPeriod);
     	shooterController.setOutputRange(0, 1);//don't allow reverse so that we can behave as a bang bang controller
-    	shooterController.setAbsoluteTolerance(RobotMap.SHOOTER_TOLERANCE);
+    	shooterController.setPercentTolerance(3.5);
     	
     	LiveWindow.addActuator("Shooter", "Motor", shooterMotor);
     	LiveWindow.addActuator("Shooter", "PID Controller", shooterController);

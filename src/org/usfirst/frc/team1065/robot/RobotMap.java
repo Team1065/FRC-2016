@@ -19,8 +19,7 @@ public class RobotMap {
 	    					   QUEUING_UP_SPEED = 0.7,
 	    					   QUEUING_SHOOTING_SPEED =1.0,
 	    					   QUEUING_DOWN_SPEED = 1.0,
-	    					   DRIVE_STRAIGHT_BAND_PERCENTAGE = 0.2,
-	    					   SHOOTER_TOLERANCE = 100;//if we are within 100 rpm we are on target
+	    					   DRIVE_STRAIGHT_BAND_PERCENTAGE = 0.2;
     
     //Shooter RPM values
     public static final double SHOOTER_RPM_0 = 0.0,
