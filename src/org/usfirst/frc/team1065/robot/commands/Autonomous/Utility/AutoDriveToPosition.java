@@ -1,7 +1,5 @@
 package org.usfirst.frc.team1065.robot.commands.Autonomous.Utility;
 
-import javax.swing.text.Position;
-
 import org.usfirst.frc.team1065.robot.Robot;
 import org.usfirst.frc.team1065.robot.RobotMap.StartingPosition;
 import org.usfirst.frc.team1065.robot.RobotMap.TargetPosition;
@@ -19,19 +17,19 @@ public class AutoDriveToPosition extends CommandGroup {
     	if(targetPosition == TargetPosition.Left){
     		switch(initialPosition){
     		    case FarLeft:
-    		    	addSequential(new PosDriveSignature(30,110,55,10)); //needs to be checked
+    		    	addSequential(new PosDriveSignature(30,110,55,10)); //not tested in the field
     		    	break;
     		    case Left:
-    		    	addSequential(new PosDriveSignature(0,120,60,20)); //exact measurements needed
+    		    	addSequential(new PosDriveSignature(6,98,55,10)); //not tested in the field
     		    	break;
     		    case Middle:
-    		    	addSequential(new PosDriveSignature(-30,130,60,20)); //exact measurements needed
+    		    	addSequential(new PosDriveSignature(-24,105,55,10)); //not tested in the field
     		    	break;
     		    case Right:
-    		    	addSequential(new PosDriveSignature(-45,150,60,20)); //exact measurements needed
+    		    	addSequential(new PosDriveSignature(-42,129,55,10)); //not tested in the field
     		    	break;
     		    case FarRight:
-    		    	addSequential(new PosDriveSignature(-60,170,60,20)); //exact measurements needed
+    		    	addSequential(new PosDriveSignature(-55,162,55,10)); //not tested in the field
     		    	break;
     			default:
     				break;
@@ -40,19 +38,19 @@ public class AutoDriveToPosition extends CommandGroup {
     	else if(targetPosition == TargetPosition.Center){
     		switch(initialPosition){
 		    case FarLeft:
-		    	addSequential(new PosDriveSignature(45,190,0,60)); //needs to be checked
+		    	addSequential(new PosDriveSignature(65,130,-1,10)); //not tested in the field
 		    	break;
 		    case Left:
-		    	addSequential(new PosDriveSignature(31,155,0,60)); //needs to be checked
+		    	addSequential(new PosDriveSignature(52,93,-1,10)); //not tested in the field
 		    	break;
 		    case Middle:
-		    	addSequential(new PosDriveSignature(12,70,0,60)); //needs to be checked
+		    	addSequential(new PosDriveSignature(25,65,-1,10)); //not tested in the field
 		    	break;
 		    case Right:
-		    	addSequential(new PosDriveSignature(-10,135,0,60)); //needs to be checked
+		    	addSequential(new PosDriveSignature(-20,63,0,10)); //not tested in the field
 		    	break;
 		    case FarRight:
-		    	addSequential(new PosDriveSignature(-30,145,0,60)); //needs to be checked
+		    	addSequential(new PosDriveSignature(-50,88,0,10)); //not tested in the field
 		    	break;
 			default:
 				break;
@@ -61,19 +59,19 @@ public class AutoDriveToPosition extends CommandGroup {
     	else if(targetPosition == TargetPosition.Right){
     		switch(initialPosition){
 		    case FarLeft:
-		    	addSequential(new PosDriveSignature(60,240,0,40,-45,20)); //exact measurements needed
+		    	addSequential(new PosDriveSignature(91,189,-1,97,-55,10)); //not tested in the field
 		    	break;
 		    case Left:
-		    	addSequential(new PosDriveSignature(60,190,0,65,-45,20)); //exact measurements needed
+		    	addSequential(new PosDriveSignature(58,173,-55,10)); //not tested in the field
 		    	break;
 		    case Middle:
-		    	addSequential(new PosDriveSignature(45,140,0,40,-45,20)); //exact measurements needed
+		    	addSequential(new PosDriveSignature(47,138,-55,10)); //not tested in the field
 		    	break;
 		    case Right:
-		    	addSequential(new PosDriveSignature(30,140,-45,20)); //exact measurements needed
+		    	addSequential(new PosDriveSignature(30,110,-55,10)); //not tested in the field
 		    	break;
 		    case FarRight:
-		    	addSequential(new PosDriveSignature(0,140,-45,20)); //exact measurements needed
+		    	addSequential(new PosDriveSignature(6,97,-55,10)); //not tested in the field
 		    	break;
 			default:
 				break;
