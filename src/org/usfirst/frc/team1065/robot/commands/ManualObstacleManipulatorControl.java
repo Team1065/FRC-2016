@@ -20,7 +20,7 @@ public class ManualObstacleManipulatorControl extends Command {
     // Called repeatedly when this Command is scheduled to run
     protected void execute() {
     	Robot.manipulator.setActuators(!Robot.oi.getObstacleManipolatorSwitch());
-    	if(Robot.shooter.isShooterOn()){
+    	if(Robot.shooter.isShooterOn() || Robot.oi.getDriveOverride()){
     		Robot.manipulator.stopConpressor();
     	}
     	else{
