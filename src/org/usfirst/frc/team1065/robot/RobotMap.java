@@ -23,11 +23,11 @@ public class RobotMap {
     
     //Shooter RPM values
     public static final double SHOOTER_RPM_0 = 0.0,
-    						   SHOOTER_RPM_1 = 4300.0,
-    						   SHOOTER_RPM_2 = 4400.0,
-    						   SHOOTER_RPM_3 = 4500.0,
-    						   SHOOTER_RPM_4 = 4600.0,
-    						   SHOOTER_RPM_5 = 4700.0;
+    						   SHOOTER_RPM_1 = 4500.0,
+    						   SHOOTER_RPM_2 = 4600.0,
+    						   SHOOTER_RPM_3 = 4670.0,
+    						   SHOOTER_RPM_4 = 4800.0,
+    						   SHOOTER_RPM_5 = 4900.0;
     
     //Shooter Voltage values
     public static final double SHOOTER_VOLT_0 = 0.0,

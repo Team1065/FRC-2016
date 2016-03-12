@@ -28,8 +28,8 @@ public class AutoShoot extends CommandGroup {
     		addSequential(new ShootLow(6.0));
     	}
     	else{
-    		addParallel(new DriveToDistance(.65, 20, 5.0));
-    		addSequential(new SetShooterSpeed(4600));
+    		addParallel(new DriveToDistance(.65, 30, 5.0));
+    		addSequential(new SetShooterSpeed(4700));
     		addSequential(new DriveForTime(0, 0, 1.0));
     		addSequential(new ShootHigh(5.0));
     	}

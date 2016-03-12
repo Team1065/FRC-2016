@@ -17,19 +17,19 @@ public class AutoDriveToPosition extends CommandGroup {
     	if(targetPosition == TargetPosition.Left){
     		switch(initialPosition){
     		    case FarLeft:
-    		    	addSequential(new PosDriveSignature(30,110,55,10)); //not tested in the field
+    		    	addSequential(new PosDriveSignature(30,110,57.5,10)); //not tested in the field
     		    	break;
     		    case Left:
-    		    	addSequential(new PosDriveSignature(6,98,55,10)); //not tested in the field
+    		    	addSequential(new PosDriveSignature(6,98,56,10)); //not tested in the field
     		    	break;
     		    case Middle:
-    		    	addSequential(new PosDriveSignature(-24,105,55,10)); //not tested in the field
+    		    	addSequential(new PosDriveSignature(-24,105,56,10)); //not tested in the field
     		    	break;
     		    case Right:
-    		    	addSequential(new PosDriveSignature(-42,129,55,10)); //not tested in the field
+    		    	addSequential(new PosDriveSignature(-42,129,56,10)); //not tested in the field
     		    	break;
     		    case FarRight:
-    		    	addSequential(new PosDriveSignature(-55,162,55,10)); //not tested in the field
+    		    	addSequential(new PosDriveSignature(-55,162,56,10)); //not tested in the field
     		    	break;
     			default:
     				break;

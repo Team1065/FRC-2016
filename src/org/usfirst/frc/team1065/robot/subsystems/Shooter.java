@@ -59,7 +59,7 @@ public class Shooter extends Subsystem {
     	
     	shooterController = new PIDController(ratePIDPTerm,ratePIDITerm, ratePIDDTerm, shooterCounter, shooterMotor, ratePIDPeriod);
     	shooterController.setOutputRange(0, 1);//don't allow reverse so that we can behave as a bang bang controller
-    	shooterController.setPercentTolerance(3.5);
+    	shooterController.setPercentTolerance(2.5);
     	
     	LiveWindow.addActuator("Shooter", "Motor", shooterMotor);
     	LiveWindow.addActuator("Shooter", "PID Controller", shooterController);
@@ -94,7 +94,12 @@ public class Shooter extends Subsystem {
     
     public boolean onTarget(){
     	if(shooterController.isEnabled() && shooterController.getSetpoint() > 10.0){
-    		return shooterController.onTarget();
+			if(shooterCounter.getRate() > shooterController.getSetpoint() - 400){
+				return true;
+			}
+			else{
+				return false;
+			}
     	}
     	else{
     		return false;//turn off indicator if motor is at 0

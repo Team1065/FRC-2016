@@ -9,6 +9,7 @@ import com.ni.vision.NIVision.Image;
 
 import edu.wpi.first.wpilibj.CameraServer;
 import edu.wpi.first.wpilibj.command.Subsystem;
+import edu.wpi.first.wpilibj.image.NIVisionException;
 import edu.wpi.first.wpilibj.vision.USBCamera;
 
 
@@ -24,10 +25,15 @@ public class CameraSystem extends Subsystem{
     	
     	frame = NIVision.imaqCreateImage(NIVision.ImageType.IMAGE_RGB, 0);
     	//TODO: make it safe in case the cameras are not connected
-        sessionfront = NIVision.IMAQdxOpenCamera(RobotMap.FRONT_CAM, NIVision.IMAQdxCameraControlMode.CameraControlModeController);
-        sessionback = NIVision.IMAQdxOpenCamera(RobotMap.BACK_CAM, NIVision.IMAQdxCameraControlMode.CameraControlModeController);
-        currSession = sessionfront;
-        NIVision.IMAQdxConfigureGrab(currSession);
+    	try{
+    		sessionfront = NIVision.IMAQdxOpenCamera(RobotMap.FRONT_CAM, NIVision.IMAQdxCameraControlMode.CameraControlModeController);
+        	sessionback = NIVision.IMAQdxOpenCamera(RobotMap.BACK_CAM, NIVision.IMAQdxCameraControlMode.CameraControlModeController);
+        	currSession = sessionfront;
+        	NIVision.IMAQdxConfigureGrab(currSession);
+    	}
+    	catch(Exception e){
+    		System.out.print("camera exception!!!!");
+    	}
         //CameraServer.getInstance().setQuality(25);//add and tune
         
         //test and tune
@@ -61,20 +67,35 @@ public class CameraSystem extends Subsystem{
 	}
 	
 	public void switchToBack(){
-		NIVision.IMAQdxStopAcquisition(currSession);
-		currSession = sessionback;
-        NIVision.IMAQdxConfigureGrab(currSession);
+		try{
+			NIVision.IMAQdxStopAcquisition(currSession);
+			currSession = sessionback;
+	        NIVision.IMAQdxConfigureGrab(currSession);
+		}
+		catch(Exception e){
+			System.out.print("camera exception!!!!");
+		}
 	}
 	
 	public void switchToFront(){
-		NIVision.IMAQdxStopAcquisition(currSession);
-		currSession = sessionfront;
-		NIVision.IMAQdxConfigureGrab(currSession);
+		try{
+			NIVision.IMAQdxStopAcquisition(currSession);
+			currSession = sessionfront;
+			NIVision.IMAQdxConfigureGrab(currSession);
+		}
+		catch(Exception e){
+			System.out.print("camera exception!!!!");
+		}
 	}
 	
 	public void sendImageToDS(){
-		NIVision.IMAQdxGrab(currSession, frame, 1);
-        CameraServer.getInstance().setImage(frame);
+		try{
+			NIVision.IMAQdxGrab(currSession, frame, 1);
+			CameraServer.getInstance().setImage(frame);
+		}
+		catch(Exception e){
+			System.out.print("camera exception!!!!");
+		}
 	}
 	
 }

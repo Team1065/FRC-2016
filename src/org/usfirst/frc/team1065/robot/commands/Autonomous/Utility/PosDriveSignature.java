@@ -10,7 +10,7 @@ public class PosDriveSignature extends CommandGroup {
 	
 	public PosDriveSignature(double ang1, double dist1)
 	{		
-		addSequential(new RotateToAngle(.4, ang1, 10));
+		addSequential(new RotateToAngle(.5, ang1, 10));
 		addSequential(new DriveToDistance(.5, dist1, 10));
 	}
 	
@@ -20,9 +20,9 @@ public class PosDriveSignature extends CommandGroup {
 	
 	public PosDriveSignature(double ang1, double dist1, double ang2, double dist2)
 	{		
-		addSequential(new RotateToAngle(.4, ang1, 10));
+		addSequential(new RotateToAngle(.5, ang1, 10));
 		addSequential(new DriveToDistance(.5, dist1, 10));
-		addSequential(new RotateToAngle(.4, ang2, 10));
+		addSequential(new RotateToAngle(.5, ang2, 10));
 		addSequential(new DriveToDistance(.5, dist2, 10));
 	}
 	
@@ -32,11 +32,11 @@ public class PosDriveSignature extends CommandGroup {
 	
 	public PosDriveSignature(double ang1, double dist1, double ang2, double dist2, double ang3, double dist3)
 	{		
-		addSequential(new RotateToAngle(.4, ang1, 10));
+		addSequential(new RotateToAngle(.5, ang1, 10));
 		addSequential(new DriveToDistance(.5, dist1, 10));
-		addSequential(new RotateToAngle(.4, ang2, 10));
+		addSequential(new RotateToAngle(.5, ang2, 10));
 		addSequential(new DriveToDistance(.5, dist2, 10));
-		addSequential(new RotateToAngle(.4, ang3, 10));
+		addSequential(new RotateToAngle(.5, ang3, 10));
 		addSequential(new DriveToDistance(.65, dist3, 10));
 		
 	}
