@@ -22,14 +22,14 @@ public class AutoCross extends CommandGroup {
     	switch(obstacle){
     		case LowBar:
     			addSequential(new DriveToDistance(0.4, 135, 15.0));
-    			addSequential(new RotateToAngle(.5, 0, 15.0));
+    			addSequential(new RotateToAngle(.5, 0, 2.0));
     			break;
     		case RoughTerrian:
     		case RockWall:
     		case Moat:
     		case Ramparts:
-    			addSequential(new DriveToDistance(0.55, 155, 15.0));
-    			addSequential(new RotateToAngle(.5, 0, 15.0));
+    			addSequential(new DriveToDistance(0.65, 155, 15.0));
+    			addSequential(new RotateToAngle(.55, 0, 2.0));
     			break;
     		case LiftGate:
     		case Seesaw:
@@ -44,7 +44,7 @@ public class AutoCross extends CommandGroup {
 			default:
 				//addSequential(new AutoReach());
 				addSequential(new DriveToDistance(0.4, 135, 15.0));
-    			addSequential(new RotateToAngle(.5, 0, 15.0));
+    			addSequential(new RotateToAngle(.5, 0, 2.0));
 				break;
     	}
     }
