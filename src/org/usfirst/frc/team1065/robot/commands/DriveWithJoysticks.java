@@ -18,14 +18,6 @@ public class DriveWithJoysticks extends Command {
     }
 
     protected void execute() {
-    	//TODO: consider only enabling disabling on an edge transition
-    	if(Robot.oi.getDriveOverride()){
-    		Robot.drive.disableRateControllers();
-    	}
-    	else{
-    		Robot.drive.enableRateControllers();
-    	}
-    	
     	double leftY = Robot.oi.getLeftJoystickY();
     	double rightY = Robot.oi.getRightJoystickY();
     	double averageY = Robot.oi.getYAverage();

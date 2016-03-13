@@ -34,23 +34,6 @@ public class CameraSystem extends Subsystem{
     	catch(Exception e){
     		System.out.print("camera exception!!!!");
     	}
-        //CameraServer.getInstance().setQuality(25);//add and tune
-        
-        //test and tune
-        /*cam0 = new USBCamera(RobotMap.FRONT_CAM);
-        cam1 = new USBCamera(RobotMap.FRONT_CAM);
-        
-        cam0.setBrightness(0);//tune
-        cam0.setExposureAuto();//might want to use manual one
-        cam0.setFPS(30);
-        cam0.setSize(320, 240);
-        cam0.updateSettings();
-        
-        cam1.setBrightness(0);//tune
-        cam1.setExposureAuto();//might want to use manual one
-        cam1.setFPS(30);
-        cam1.setSize(320, 240);
-        cam1.updateSettings();*/
     }
     
 	protected void initDefaultCommand() {

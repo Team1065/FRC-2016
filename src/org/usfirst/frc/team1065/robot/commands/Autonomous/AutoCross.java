@@ -42,7 +42,9 @@ public class AutoCross extends CommandGroup {
     		case Drawbridge:
     		case Door:
 			default:
-				addSequential(new AutoReach());
+				//addSequential(new AutoReach());
+				addSequential(new DriveToDistance(0.4, 135, 15.0));
+    			addSequential(new RotateToAngle(.5, 0, 15.0));
 				break;
     	}
     }

@@ -93,13 +93,6 @@ public class Robot extends IterativeRobot {
     	drive.resetAngle();
     	drive.resetEncoders();
     	
-    	if(oi.getDriveOverride()){
-    		drive.disableRateControllers();
-    	}
-    	else{
-    		drive.enableRateControllers();
-    	}
-    	
     	if(oi.getShooterOverride()){
     		shooter.disablePIDController();
     	}
