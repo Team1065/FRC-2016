@@ -21,9 +21,7 @@ import edu.wpi.first.wpilibj.smartdashboard.SmartDashboard;
  */
 public class DriveTrain extends Subsystem {
 	private Talon leftTalon, rightTalon;
-	//distance and rotate will be done in command
-	//straight pid(angle)= setL&R(speed-pidGet, speed+pidGet), rates straight to motors
-    private PIDController straightPID, leftRatePID, rightRatePID;
+    private PIDController straightPID;
 	private Encoder leftEncoder, rightEncoder;
 	private AHRS navX;
 	private DummyOutput dummyStraight;
@@ -42,18 +40,11 @@ public class DriveTrain extends Subsystem {
     	rightTalon = new Talon(RobotMap.RIGHT_DRIVE_MOTOR_PORT);
     	rightTalon.setInverted(true);
     	
-    	ratePIDPTerm = 0.0005;
-    	ratePIDITerm = 0.0;
-    	ratePIDDTerm = 0.0;
-    	
     	straightPIDPTerm = 0.055;
     	straightPIDITerm = 0.0;
     	straightPIDDTerm = 0.0;
     	
     	PIDPeriod = 0.02;
-    	
-    	leftRatePID = new PIDController(ratePIDPTerm,ratePIDITerm, ratePIDDTerm, leftEncoder, leftTalon,PIDPeriod);
-    	rightRatePID = new PIDController(ratePIDPTerm,ratePIDITerm, ratePIDDTerm, rightEncoder, rightTalon,PIDPeriod);
    	
     	try {
     		navX = new AHRS(SPI.Port.kMXP);
@@ -74,30 +65,20 @@ public class DriveTrain extends Subsystem {
     	
     	LiveWindow.addActuator("DriveTrain","Left Motor Controller", leftTalon);
     	LiveWindow.addActuator("DriveTrain","Right Motor Controller", rightTalon);
-    	LiveWindow.addActuator("DriveTrain","Left Motor PID", leftRatePID);
-    	LiveWindow.addActuator("DriveTrain","Right Motor PID", rightRatePID);
-    	LiveWindow.addActuator("DriveTrain","Straight PID", straightPID);
     	LiveWindow.addSensor("DriveTrain", "Left Encoder", leftEncoder);
     	LiveWindow.addSensor("DriveTrain", "Right Encoder", rightEncoder);
     	LiveWindow.addSensor("DriveTrain", "NavX", navX);
     }
-
-    //setL&R, if encoderEnable LRate.setSetpoint(lspeed * MaxSpeed)...
     
     public void initDefaultCommand() {
         setDefaultCommand(new DriveWithJoysticks());
     }
     
     public void tankDrive(double leftSpeed, double rightSpeed){
-    	if(leftRatePID.isEnabled()){
-    		leftRatePID.setSetpoint(leftSpeed * RobotMap.DRIVE_TOP_SPEED);
-    		rightRatePID.setSetpoint(rightSpeed * RobotMap.DRIVE_TOP_SPEED);
-    	}
-    	else{
+
     		leftTalon.set(leftSpeed);
         	rightTalon.set(rightSpeed);
-    	}
-    	
+        	
     	//TODO: remove
     	SmartDashboard.putNumber("Drive Angle", navX.getYaw());
     	//SmartDashboard.putNumber("left speed", leftEncoder.getRate());
@@ -127,26 +108,6 @@ public class DriveTrain extends Subsystem {
 	public double getLeftEncoderDistance() {
 		return leftEncoder.getDistance();
 	}
-	
-	public void enableRateControllers(){
-    	/*if(!leftRatePID.isEnabled()){
-    		leftRatePID.enable();
-    	}
-    	
-    	if(!rightRatePID.isEnabled()){
-    		rightRatePID.enable();
-    	}*/
-    }
-    
-    public void disableRateControllers(){
-    	if(leftRatePID.isEnabled()){
-    		leftRatePID.disable();
-    	}
-    	
-    	if(rightRatePID.isEnabled()){
-    		rightRatePID.disable();
-    	}
-    }
     
     public void enableStraightController(){
     	if(!straightPID.isEnabled()){

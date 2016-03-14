@@ -94,7 +94,9 @@ public class Shooter extends Subsystem {
     
     public boolean onTarget(){
     	if(shooterController.isEnabled() && shooterController.getSetpoint() > 10.0){
-			if(shooterCounter.getRate() > shooterController.getSetpoint() - 400){
+    		double rate = shooterCounter.getRate();
+			if(rate > (shooterController.getSetpoint() - 100) &&
+					rate < (shooterController.getSetpoint() + 100)){
 				return true;
 			}
 			else{
@@ -102,7 +104,7 @@ public class Shooter extends Subsystem {
 			}
     	}
     	else{
-    		return false;//turn off indicator if motor is at 0
+    		return false;
     	}
     }
     
