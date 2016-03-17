@@ -10,16 +10,26 @@ import edu.wpi.first.wpilibj.command.Command;
  */
 public class ManualBoulderControl extends Command {
 
+	boolean shoot;
+	double timer;
     public ManualBoulderControl() {
         requires(Robot.intake);
     }
 
     // Called just before this Command runs the first time
     protected void initialize() {
+    	shoot = false;
+    	timer = 0.0;
     }
 
     // Called repeatedly when this Command is scheduled to run
-    protected void execute() {
+    protected void execute() { 	
+    	if(shoot){
+    		if(timer > 2.0){//latch shoot signal for 2 seconds
+    			shoot = false;
+    		}
+    		timer += 0.02;
+    	}
     	
     	if(Robot.oi.getIntakeOutSwitch()){
     		Robot.intake.setIntakeOut(RobotMap.INTAKE_OUT_SPEED);
@@ -33,9 +43,21 @@ public class ManualBoulderControl extends Command {
     	}
     	else if(Robot.oi.getIntakeInSwitch()){
     		
-    		if((Robot.oi.getRightJoystickTrigger() && Robot.oi.getRightJoystickTop())){
-				Robot.intake.setQueuingUp(RobotMap.QUEUING_SHOOTING_SPEED);
+    		if(Robot.oi.getRightJoystickTrigger() && Robot.oi.getRightJoystickTop()){
+    			//reset timer if shooter was already up to speed
+    			if(shoot){
+    				timer = 0.0;
+    			}
+    			//send shoot command if the shooter is up to speed
+    			else if(Robot.shooter.onTarget()){
+    				shoot = true;
+    				timer = 0.0;
+    			}
 			}
+    		
+    		if(shoot){
+    			Robot.intake.setQueuingUp(RobotMap.QUEUING_SHOOTING_SPEED);
+    		}
     		else if(!Robot.intake.getQueuingIR()){//took out requirement for shooter to be at speed
 				Robot.intake.setQueuingUp(RobotMap.QUEUING_UP_SPEED);
 			}
