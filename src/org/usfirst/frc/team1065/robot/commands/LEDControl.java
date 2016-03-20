@@ -2,6 +2,7 @@ package org.usfirst.frc.team1065.robot.commands;
 
 import org.usfirst.frc.team1065.robot.Robot;
 
+import edu.wpi.first.wpilibj.Timer;
 import edu.wpi.first.wpilibj.command.Command;
 import edu.wpi.first.wpilibj.smartdashboard.SmartDashboard;
 
@@ -9,15 +10,13 @@ import edu.wpi.first.wpilibj.smartdashboard.SmartDashboard;
  *
  */
 public class LEDControl extends Command {
-
-	double blinkTimer;
+	
     public LEDControl() {
     	requires(Robot.lighting);
     }
 
     // Called just before this Command runs the first time
     protected void initialize() {
-    	blinkTimer = 0;
     }
 
     // Called repeatedly when this Command is scheduled to run
@@ -25,13 +24,13 @@ public class LEDControl extends Command {
     	boolean allLightsState = false;
     	
     	if(Robot.intake.getQueuingIR()){
-    		if(blinkTimer % 1.0 < 0.5){
-    			allLightsState = true;//blinking
+    		double timeDecimal = Timer.getFPGATimestamp() % 1.0;
+    		if(Robot.shooter.onTarget()){
+        		allLightsState = true;
     		}
-    		blinkTimer += 0.020;// about 20 ms cycle
-    	}
-    	else if(Robot.shooter.onTarget()){
-    		allLightsState = true;
+    		else if(timeDecimal < 0.35 || timeDecimal > 0.7 ){
+    			allLightsState = true;
+    		}
     	}
     	
     	Robot.lighting.setLeftLED(allLightsState);

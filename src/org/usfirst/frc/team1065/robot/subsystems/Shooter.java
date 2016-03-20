@@ -8,6 +8,7 @@ import edu.wpi.first.wpilibj.PIDController;
 import edu.wpi.first.wpilibj.PIDSourceType;
 import edu.wpi.first.wpilibj.Solenoid;
 import edu.wpi.first.wpilibj.Talon;
+import edu.wpi.first.wpilibj.Timer;
 import edu.wpi.first.wpilibj.VictorSP;
 import edu.wpi.first.wpilibj.command.Subsystem;
 import edu.wpi.first.wpilibj.livewindow.LiveWindow;
@@ -23,6 +24,7 @@ public class Shooter extends Subsystem {
     private Solenoid shooterHood;
     
     private double ratePIDPTerm, ratePIDITerm, ratePIDDTerm, ratePIDPeriod;
+    private double prevCount, prevTime;
     
     public Shooter(){  	
     	shooterHood = new Solenoid(RobotMap.SHOOTER_HOOD_PORT);
@@ -30,6 +32,7 @@ public class Shooter extends Subsystem {
     	shooterMotor = new VictorSP(RobotMap.SHOOTER_MOTOR_PORT);
     	shooterMotor.setInverted(true);
     	//Banner
+    	/*
     	shooterCounter = new Counter(RobotMap.SHOOTER_COUNTER_PORT);
     	shooterCounter.setDistancePerPulse((1.0/4.0)*60.0);//4 counts per revolution. 60 to transform seconds to minutes
     	shooterCounter.setPIDSourceType(PIDSourceType.kRate);
@@ -41,21 +44,20 @@ public class Shooter extends Subsystem {
     	ratePIDITerm = 0.0;
     	ratePIDDTerm = 0.0;
     	ratePIDPeriod = 0.01;//10 ms
+    	*/
     	
     	//Quad Encoder
-    	/*
     	shooterCounter = new Counter(RobotMap.SHOOTER_ENCODER_PORT);
-    	shooterCounter.setSemiPeriodMode(false); 
+    	//shooterCounter.setSemiPeriodMode(false);
     	shooterCounter.setDistancePerPulse((1.0/360.0) * 60.0);
     	shooterCounter.setPIDSourceType(PIDSourceType.kRate);
-    	shooterCounter.setSamplesToAverage(30);//5ms (30-120), 10ms (60-240)
-    	shooterCounter.setSemiPeriodMode(true); 
+    	shooterCounter.setSamplesToAverage(100);//5ms (30-120), 10ms (60-240) 
+    	
     	
     	ratePIDPTerm = 100.0;//Making P very high so it behaves as a bang bang Controller
     	ratePIDITerm = 0.0;
     	ratePIDDTerm = 0.0;
     	ratePIDPeriod = 0.005;//5 ms
-    	 */
     	
     	shooterController = new PIDController(ratePIDPTerm,ratePIDITerm, ratePIDDTerm, shooterCounter, shooterMotor, ratePIDPeriod);
     	shooterController.setOutputRange(0, 1);//don't allow reverse so that we can behave as a bang bang controller
@@ -94,7 +96,7 @@ public class Shooter extends Subsystem {
     
     public boolean onTarget(){
     	if(shooterController.isEnabled() && shooterController.getSetpoint() > 10.0){
-    		double rate = shooterCounter.getRate();
+    		double rate = getSpeed();
 			if(rate > (shooterController.getSetpoint() - 100) &&
 					rate < (shooterController.getSetpoint() + 100)){
 				return true;
@@ -108,6 +110,18 @@ public class Shooter extends Subsystem {
     	}
     }
     
+    public double getSpeed(){
+    	double time = Timer.getFPGATimestamp();
+    	double timeDiff = time - prevTime;
+    	prevTime = time;
+    	
+    	double count = shooterCounter.get();
+    	double countDiff = count - prevCount;
+    	prevCount = count;
+    	
+    	return ((countDiff/timeDiff)*60.0)/360.0;
+    }
+    
     public void set(double speed){
     	//check if we should be setting the motor or the controller
     	if(shooterController.isEnabled()){
@@ -118,7 +132,8 @@ public class Shooter extends Subsystem {
     	}
     	
     	//TODO: delete
-    	SmartDashboard.putNumber("Shooter Speed", shooterCounter.getRate());
+    	//SmartDashboard.putNumber("Shooter Speed", shooterCounter.getRate());
+    	SmartDashboard.putNumber("Shooter Calculated Speed", getSpeed());
     }
 }
 
