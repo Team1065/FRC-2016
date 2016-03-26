@@ -11,13 +11,12 @@ import edu.wpi.first.wpilibj.command.CommandGroup;
  */
 public class AutoDriveToPosition extends CommandGroup {
     
-	public  AutoDriveToPosition(TargetPosition targetPosition) {
-    	StartingPosition initialPosition = (StartingPosition) Robot.positionChooser.getSelected();
+	public  AutoDriveToPosition(StartingPosition startingPosition, TargetPosition targetPosition) {
     	
     	if(targetPosition == TargetPosition.Left){
-    		switch(initialPosition){
+    		switch(startingPosition){
     		    case FarLeft:
-    		    	addSequential(new PosDriveSignature(32,110,58,10));
+    		    	addSequential(new PosDriveSignature(60,88));
     		    	break;
     		    case Left:
     		    	addSequential(new PosDriveSignature(6,98,58,10));
@@ -36,7 +35,7 @@ public class AutoDriveToPosition extends CommandGroup {
     		}
     	}
     	else if(targetPosition == TargetPosition.Center){
-    		switch(initialPosition){
+    		switch(startingPosition){
 		    case FarLeft:
 		    	addSequential(new PosDriveSignature(65,130,-1,10));
 		    	break;
@@ -57,7 +56,7 @@ public class AutoDriveToPosition extends CommandGroup {
     		}
     	}
     	else if(targetPosition == TargetPosition.Right){
-    		switch(initialPosition){
+    		switch(startingPosition){
 		    case FarLeft:
 		    	addSequential(new PosDriveSignature(91,189,-1,97,-58,10));
 		    	break;
@@ -68,10 +67,16 @@ public class AutoDriveToPosition extends CommandGroup {
 		    	addSequential(new PosDriveSignature(47,138,-58,10));
 		    	break;
 		    case Right:
-		    	addSequential(new PosDriveSignature(30,110,-58,10));
+		    	addSequential(new PosDriveSignature(90,55,0,120));
+		    	addSequential(new DriveForTime(.35,.35,1.5));
+		    	addSequential(new DriveToDistance(-.4,36,5));
+		    	addSequential(new RotateToAngle(.5, -60, 5));
 		    	break;
 		    case FarRight:
-		    	addSequential(new PosDriveSignature(6,97,-58,10));
+		    	addSequential(new PosDriveSignature(0,120));
+		    	addSequential(new DriveForTime(.35,.35,1.5));
+		    	addSequential(new DriveToDistance(-.4,36,5));
+		    	addSequential(new RotateToAngle(.5, -60, 5));
 		    	break;
 			default:
 				break;

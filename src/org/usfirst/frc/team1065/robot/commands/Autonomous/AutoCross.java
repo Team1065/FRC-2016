@@ -16,25 +16,27 @@ import edu.wpi.first.wpilibj.command.CommandGroup;
  */
 public class AutoCross extends CommandGroup {
     
-    public  AutoCross() {
+    public  AutoCross(Obstacle obstacle) {
     	addSequential(new ResetDriveAngle());
-    	Obstacle obstacle = (Obstacle) Robot.obstacleChooser.getSelected();
     	switch(obstacle){
     		case LowBar:
-    			addSequential(new DriveToDistance(0.4, 135, 15.0));
+    			addSequential(new DriveToDistance(0.4, 214, 15.0));
     			addSequential(new RotateToAngle(.5, 0, 2.0));
     			break;
     		case RoughTerrian:
-    		case RockWall:
     		case Moat:
     		case Ramparts:
-    			addSequential(new DriveToDistance(0.65, 155, 15.0));
+    			addSequential(new DriveToDistance(0.65, 170, 15.0));
+    			addSequential(new RotateToAngle(.55, 0, 2.0));
+    			break;
+    		case RockWall:
+    			addSequential(new DriveToDistance(0.65, 170, 15.0));
     			addSequential(new RotateToAngle(.55, 0, 2.0));
     			break;
     		case LiftGate:
     		case Seesaw:
     			addSequential(new ExtendManipulator(2.0));
-    			addSequential(new DriveToDistance(-0.5, 155, 15.0));
+    			addSequential(new DriveToDistance(-0.5, 170, 15.0));
     			addSequential(new RetractManipulator(1.0));
     			addSequential(new RotateToAngle(.55, 180, 15.0));
     			addSequential(new ResetDriveAngle());

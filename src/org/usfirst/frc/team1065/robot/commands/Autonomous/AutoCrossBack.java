@@ -18,17 +18,16 @@ import edu.wpi.first.wpilibj.command.CommandGroup;
  */
 public class AutoCrossBack extends CommandGroup {
     
-    public  AutoCrossBack() {
-        addSequential(new AutoCross());
+    public  AutoCrossBack(Obstacle obstacle) {
+        addSequential(new AutoCross(obstacle));
         addSequential(new SetIntakeSpeed(RobotMap.INTAKE_OUT_SPEED, 1.0));
 		addSequential(new ShootLow(2.0));
         
-        Obstacle obstacle = (Obstacle) Robot.obstacleChooser.getSelected();
         //Rotate if we are not  crossing the portcullis or seesaw because we traverse those backwards
         if(obstacle != Obstacle.LiftGate && obstacle != Obstacle.Seesaw){
         	addSequential(new RotateToAngle(.55,180,6.0));
         }
-        addSequential(new DriveToDistance(-0.5, 20, 15.0));
-        addSequential(new AutoCross());
+        addSequential(new DriveToDistance(-0.5, 30, 15.0));
+        addSequential(new AutoCross(obstacle));
     }
 }

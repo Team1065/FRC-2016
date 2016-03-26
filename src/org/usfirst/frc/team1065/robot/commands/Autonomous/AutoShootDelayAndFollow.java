@@ -1,6 +1,8 @@
 package org.usfirst.frc.team1065.robot.commands.Autonomous;
 
 import org.usfirst.frc.team1065.robot.RobotMap;
+import org.usfirst.frc.team1065.robot.RobotMap.Obstacle;
+import org.usfirst.frc.team1065.robot.RobotMap.StartingPosition;
 import org.usfirst.frc.team1065.robot.RobotMap.TargetGoal;
 import org.usfirst.frc.team1065.robot.RobotMap.TargetPosition;
 import org.usfirst.frc.team1065.robot.commands.Autonomous.Utility.AutoDriveToPosition;
@@ -18,9 +20,9 @@ import edu.wpi.first.wpilibj.command.CommandGroup;
  */
 public class AutoShootDelayAndFollow extends CommandGroup {
     
-    public  AutoShootDelayAndFollow(TargetGoal targetGoal, TargetPosition targetGoalPosition) {
-    	addSequential(new AutoCrossDelayAndFollow());
-    	addSequential(new AutoDriveToPosition(targetGoalPosition));
+    public  AutoShootDelayAndFollow(Obstacle obstacle, TargetGoal targetGoal, StartingPosition startingPosition, TargetPosition targetGoalPosition) {
+    	addSequential(new AutoCrossDelayAndFollow(obstacle));
+    	addSequential(new AutoDriveToPosition(startingPosition, targetGoalPosition));
     	
     	if(targetGoal == TargetGoal.Low){
     		addSequential(new DriveToDistance(.65, 30, 3.0));

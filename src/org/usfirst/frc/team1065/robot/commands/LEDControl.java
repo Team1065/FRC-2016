@@ -28,7 +28,7 @@ public class LEDControl extends Command {
     		if(Robot.shooter.onTarget()){
         		allLightsState = true;
     		}
-    		else if(timeDecimal < 0.35 || timeDecimal > 0.7 ){
+    		else if(timeDecimal < 0.25 || (timeDecimal > 0.5 && timeDecimal < 0.75) ){
     			allLightsState = true;
     		}
     	}

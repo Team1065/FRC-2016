@@ -68,21 +68,26 @@ public class RobotMap {
 						    INTAKE_OUT_PORT = 5,//Digital
 						    SHOOTER_CONTROLLER_OVERRIDE = 9,//Digital
 						    OBSTACLE_MANIPULATOR_SWITCH_PORT = 1,//digital
-				    		SHOOTER_KNOB_PORT = 0;//Analog
+				    		SHOOTER_KNOB_PORT = 0,//Analog
+				    		AUTO_KNOB_PORT = 1;//Analog
     
     public static final double SHOOTER_KNOB_POS_0 = 0.000,
     						   SHOOTER_KNOB_POS_1 = 0.024,
     						   SHOOTER_KNOB_POS_2 = 0.047,
     						   SHOOTER_KNOB_POS_3 = 0.071,
     						   SHOOTER_KNOB_POS_4 = 0.094,
-    						   SHOOTER_KNOB_POS_5 = 0.118;
+    						   SHOOTER_KNOB_POS_5 = 0.118,
+							   AUTO_KNOB_POS_0 = 0.000,
+							   AUTO_KNOB_POS_1 = 0.024,
+							   AUTO_KNOB_POS_2 = 0.055,
+							   AUTO_KNOB_POS_3 = 0.087;;
     
     //Camera Names
     public static String FRONT_CAM = "cam0", 
     					 BACK_CAM  = "cam1";
     
     public enum StartingPosition{FarLeft,Left,Middle,Right,FarRight};
-    public enum TargetGoal{Low,High};
+    public enum TargetGoal{Low,High,None};
     public enum TargetPosition{Left,Center,Right};
     public enum Obstacle{LiftGate,Seesaw,Moat,Ramparts,Drawbridge,Door,RockWall,RoughTerrian,LowBar};
 }

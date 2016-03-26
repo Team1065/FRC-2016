@@ -11,7 +11,7 @@ public class PosDriveSignature extends CommandGroup {
 	public PosDriveSignature(double ang1, double dist1)
 	{		
 		addSequential(new RotateToAngle(.5, ang1, 10));
-		addSequential(new DriveToDistance(.5, dist1, 10));
+		addSequential(new DriveToDistance(.45, dist1, 10));
 	}
 	
 	/**
