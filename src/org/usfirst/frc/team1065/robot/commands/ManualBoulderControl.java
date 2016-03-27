@@ -25,7 +25,7 @@ public class ManualBoulderControl extends Command {
     // Called repeatedly when this Command is scheduled to run
     protected void execute() { 	
     	if(shoot){
-    		if(timer > 2.0){//latch shoot signal for 2 seconds
+    		if(timer > 1.0){//latch shoot signal for 2 seconds
     			shoot = false;
     		}
     		timer += 0.02;

@@ -20,18 +20,15 @@ public class AutoCross extends CommandGroup {
     	addSequential(new ResetDriveAngle());
     	switch(obstacle){
     		case LowBar:
-    			addSequential(new DriveToDistance(0.4, 214, 15.0));
-    			addSequential(new RotateToAngle(.5, 0, 2.0));
+    			addSequential(new DriveToDistance(0.4, 220, 15.0));
     			break;
     		case RoughTerrian:
-    		case Moat:
     		case Ramparts:
-    			addSequential(new DriveToDistance(0.65, 170, 15.0));
-    			addSequential(new RotateToAngle(.55, 0, 2.0));
+    			addSequential(new DriveToDistance(0.8, 170, 15.0));
     			break;
     		case RockWall:
-    			addSequential(new DriveToDistance(0.65, 170, 15.0));
-    			addSequential(new RotateToAngle(.55, 0, 2.0));
+    		case Moat:
+    			addSequential(new DriveToDistance(0.8, 170, 15.0));
     			break;
     		case LiftGate:
     		case Seesaw:

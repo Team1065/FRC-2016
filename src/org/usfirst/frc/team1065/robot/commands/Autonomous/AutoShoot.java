@@ -30,7 +30,7 @@ public class AutoShoot extends CommandGroup {
     		addSequential(new ShootLow(6.0));
     	}
     	else if(targetGoal == TargetGoal.High){
-    		addSequential(new SetShooterSpeed(4700));
+    		addSequential(new SetShooterSpeed(5500));
     		addSequential(new DriveForTime(0, 0, 2.0));
     		addSequential(new ShootHigh(5.0));
     	}

@@ -16,7 +16,7 @@ public class AutoDriveToPosition extends CommandGroup {
     	if(targetPosition == TargetPosition.Left){
     		switch(startingPosition){
     		    case FarLeft:
-    		    	addSequential(new PosDriveSignature(60,88));
+    		    	addSequential(new PosDriveSignature(60,65));
     		    	break;
     		    case Left:
     		    	addSequential(new PosDriveSignature(6,98,58,10));
@@ -67,16 +67,21 @@ public class AutoDriveToPosition extends CommandGroup {
 		    	addSequential(new PosDriveSignature(47,138,-58,10));
 		    	break;
 		    case Right:
-		    	addSequential(new PosDriveSignature(90,55,0,120));
-		    	addSequential(new DriveForTime(.35,.35,1.5));
-		    	addSequential(new DriveToDistance(-.4,36,5));
+		    	addSequential(new RotateToAngle(.6, 60, 5));
+		    	addSequential(new DriveToDistance(.65,45,5));
+		    	addSequential(new RotateToAngle(.6, 0, 5));
+		    	addSequential(new DriveToDistance(.65,75,5));
+		    	addSequential(new DriveForTime(.35,.35,1));
+		    	addSequential(new DriveToDistance(-.35,13.5,5));
 		    	addSequential(new RotateToAngle(.5, -60, 5));
+		    	addSequential(new DriveToDistance(.4,12,5));
 		    	break;
 		    case FarRight:
 		    	addSequential(new PosDriveSignature(0,120));
-		    	addSequential(new DriveForTime(.35,.35,1.5));
-		    	addSequential(new DriveToDistance(-.4,36,5));
+		    	addSequential(new DriveForTime(.35,.35,2));
+		    	addSequential(new DriveToDistance(-.35,13.5,5));
 		    	addSequential(new RotateToAngle(.5, -60, 5));
+		    	addSequential(new DriveToDistance(.4,12,5));
 		    	break;
 			default:
 				break;

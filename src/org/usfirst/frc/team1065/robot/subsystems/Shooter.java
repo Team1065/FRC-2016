@@ -95,7 +95,7 @@ public class Shooter extends Subsystem {
     }
     
     public boolean onTarget(){
-    	if(shooterController.isEnabled() && shooterController.getSetpoint() > 10.0){
+    	if(shooterController.getSetpoint() > 10.0){
     		double rate = getSpeed();
 			if(rate > (shooterController.getSetpoint() - 100) &&
 					rate < (shooterController.getSetpoint() + 100)){
@@ -133,7 +133,7 @@ public class Shooter extends Subsystem {
     	
     	//TODO: delete
     	//SmartDashboard.putNumber("Shooter Speed", shooterCounter.getRate());
-    	SmartDashboard.putNumber("Shooter Calculated Speed", getSpeed());
+    	//SmartDashboard.putNumber("Shooter Calculated Speed", getSpeed());
     }
 }
 
