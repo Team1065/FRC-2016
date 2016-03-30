@@ -25,7 +25,7 @@ public class ManualBoulderControl extends Command {
     // Called repeatedly when this Command is scheduled to run
     protected void execute() { 	
     	if(shoot){
-    		if(timer > 1.0){//latch shoot signal for 2 seconds
+    		if(timer > 0.25){//latch shoot signal for 2 seconds
     			shoot = false;
     		}
     		timer += 0.02;
@@ -49,7 +49,7 @@ public class ManualBoulderControl extends Command {
     				timer = 0.0;
     			}
     			//send shoot command if the shooter is up to speed
-    			else if(Robot.shooter.onTarget()){
+    			else if(Robot.shooter.onTarget() || !Robot.shooter.isPIDEnabled()){
     				shoot = true;
     				timer = 0.0;
     			}

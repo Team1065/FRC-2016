@@ -24,11 +24,11 @@ public class AutoCross extends CommandGroup {
     			break;
     		case RoughTerrian:
     		case Ramparts:
-    			addSequential(new DriveToDistance(0.8, 170, 15.0));
+    			addSequential(new DriveToDistance(0.7, 170, 15.0));
     			break;
     		case RockWall:
     		case Moat:
-    			addSequential(new DriveToDistance(0.8, 170, 15.0));
+    			addSequential(new DriveToDistance(0.7, 170, 15.0));
     			break;
     		case LiftGate:
     		case Seesaw:

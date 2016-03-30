@@ -85,6 +85,10 @@ public class Shooter extends Subsystem {
     	}
     }
     
+    public boolean isPIDEnabled(){
+    	return shooterController.isEnabled();
+    }
+    
     public boolean isShooterOn(){
     	if(Math.abs(shooterMotor.get()) > 0.1 || shooterController.getSetpoint() > 10.0){
     		return true;
