@@ -23,11 +23,11 @@ public class RobotMap {
     
     //Shooter RPM values
     public static final double SHOOTER_RPM_0 = 0.0,
-    						   SHOOTER_RPM_1 = 4700.0,
-    						   SHOOTER_RPM_2 = 4900.0,
-    						   SHOOTER_RPM_3 = 5100.0,
-    						   SHOOTER_RPM_4 = 5300.0,
-    						   SHOOTER_RPM_5 = 5500.0;
+    						   SHOOTER_RPM_1 = 5500.0,
+    						   SHOOTER_RPM_2 = 5600.0,
+    						   SHOOTER_RPM_3 = 5700.0,
+    						   SHOOTER_RPM_4 = 5800.0,
+    						   SHOOTER_RPM_5 = 5900.0;
     
     //Shooter Voltage values
     public static final double SHOOTER_VOLT_0 = 0.0,
@@ -49,7 +49,8 @@ public class RobotMap {
 	  	    				LEFT_LED_PORT = 2,
 	  		  	    		FRONT_LED_PORT = 3,
 	  		  	    		RIGHT_LED_PORT = 4,
-	  		  	    		BACK_LED_PORT = 5;
+	  		  	    		BACK_LED_PORT = 5,
+	  		  	    		BACK_LED_2_PORT = 6;
     //Digital Ports
     public static final int LEFT_DRIVE_ENCODER_PORT_A = 0,
 	    				    LEFT_DRIVE_ENCODER_PORT_B = 1,

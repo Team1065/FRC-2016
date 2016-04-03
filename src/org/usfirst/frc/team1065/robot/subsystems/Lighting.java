@@ -12,18 +12,14 @@ import edu.wpi.first.wpilibj.livewindow.LiveWindow;
  */
 public class Lighting extends Subsystem {
     
-	private Solenoid leftLED, frontLED, rightLED, backLED;
+	private Solenoid leftLED, frontLED, rightLED, backLED,backLED2;
 	
 	public Lighting(){
 		leftLED = new Solenoid(RobotMap.LEFT_LED_PORT);
 		frontLED = new Solenoid(RobotMap.FRONT_LED_PORT);
 		rightLED = new Solenoid(RobotMap.RIGHT_LED_PORT);
 		backLED = new Solenoid(RobotMap.BACK_LED_PORT);
-		
-		LiveWindow.addActuator("Intake", "leftLED", leftLED);
-    	LiveWindow.addActuator("Shooter", "frontLED", frontLED);
-    	LiveWindow.addActuator("Shooter", "rightLED", rightLED);
-    	LiveWindow.addActuator("Shooter", "backLED", backLED);
+		backLED2 = new Solenoid(RobotMap.BACK_LED_2_PORT);
 	}
 
     public void initDefaultCommand() {
@@ -44,6 +40,7 @@ public class Lighting extends Subsystem {
     
     public void setBackLED(boolean val){
     	backLED.set(val);
+    	backLED2.set(val);
     }
 }
 

@@ -24,16 +24,16 @@ public class AutoCross extends CommandGroup {
     			break;
     		case RoughTerrian:
     		case Ramparts:
-    			addSequential(new DriveToDistance(0.7, 170, 15.0));
+    			addSequential(new DriveToDistance(0.8, 170, 15.0));
     			break;
     		case RockWall:
     		case Moat:
-    			addSequential(new DriveToDistance(0.7, 170, 15.0));
+    			addSequential(new DriveToDistance(0.8, 170, 15.0));
     			break;
     		case LiftGate:
     		case Seesaw:
     			addSequential(new ExtendManipulator(2.0));
-    			addSequential(new DriveToDistance(-0.5, 170, 15.0));
+    			addSequential(new DriveToDistance(-0.65, 170, 15.0));
     			addSequential(new RetractManipulator(1.0));
     			addSequential(new RotateToAngle(.55, 180, 15.0));
     			addSequential(new ResetDriveAngle());
@@ -42,7 +42,7 @@ public class AutoCross extends CommandGroup {
     		case Door:
 			default:
 				//addSequential(new AutoReach());
-				addSequential(new DriveToDistance(0.4, 135, 15.0));
+				addSequential(new DriveToDistance(0.6, 135, 15.0));
     			addSequential(new RotateToAngle(.5, 0, 2.0));
 				break;
     	}

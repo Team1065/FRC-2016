@@ -48,8 +48,6 @@ public class Robot extends IterativeRobot {
 		lighting = new Lighting();
 		camera = new CameraSystem();
 		
-		
-		
     }
 	
 	public void disabledPeriodic() {

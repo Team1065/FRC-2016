@@ -25,13 +25,13 @@ public class AutoShoot extends CommandGroup {
     	addSequential(new AutoDriveToPosition(startingPosition, targetGoalPosition));
     	
     	if(targetGoal == TargetGoal.Low){
-    		addParallel(new DriveToDistance(.65, 30, 5.0));
-    		addSequential(new SetIntakeSpeed(RobotMap.INTAKE_OUT_SPEED, 2.0));
+    		addParallel(new DriveToDistance(.65, 33, 2.5));
+    		addSequential(new SetIntakeSpeed(RobotMap.INTAKE_OUT_SPEED, 1.0));
     		addSequential(new ShootLow(6.0));
     	}
     	else if(targetGoal == TargetGoal.High){
-    		addSequential(new SetShooterSpeed(5000));
-    		addSequential(new DriveForTime(0, 0, 2.0));
+    		//addSequential(new SetShooterSpeed(5600));
+    		addSequential(new DriveForTime(0, 0, 2));
     		addSequential(new ShootHigh(5.0));
     	}
     }
