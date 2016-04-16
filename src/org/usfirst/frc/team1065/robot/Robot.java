@@ -104,6 +104,7 @@ public class Robot extends IterativeRobot {
     	}
     	
     	drive.resetAngle();
+    	shooter.ForceHoodClose(false);
     }
 
     public void disabledInit(){

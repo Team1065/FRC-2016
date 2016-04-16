@@ -77,8 +77,10 @@ public class AutoDriveToPosition extends CommandGroup {
 		    	addSequential(new RotateToAngle(.55, -65, 5));
 		    	break;
 		    case FarRight:
+		    	addSequential(new RotateToAngle(.5, 30, 5));
+		    	addSequential(new DriveToDistance(.5,15,5));
 		    	addSequential(new RotateToAngle(.5, 0, 5));
-		    	addSequential(new DriveToDistance(.5,120,5));
+		    	addSequential(new DriveToDistance(.5,110,5));
 		    	addSequential(new DriveForTime(.35,.35,2));
 		    	addSequential(new DriveToDistance(-.35,17,5));
 		    	addSequential(new RotateToAngle(.55, -65, 5));

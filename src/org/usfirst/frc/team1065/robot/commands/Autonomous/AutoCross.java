@@ -5,6 +5,7 @@ import org.usfirst.frc.team1065.robot.RobotMap.Obstacle;
 import org.usfirst.frc.team1065.robot.commands.Autonomous.Utility.DriveForTime;
 import org.usfirst.frc.team1065.robot.commands.Autonomous.Utility.DriveToDistance;
 import org.usfirst.frc.team1065.robot.commands.Autonomous.Utility.ExtendManipulator;
+import org.usfirst.frc.team1065.robot.commands.Autonomous.Utility.ForceHoodToClose;
 import org.usfirst.frc.team1065.robot.commands.Autonomous.Utility.ResetDriveAngle;
 import org.usfirst.frc.team1065.robot.commands.Autonomous.Utility.RetractManipulator;
 import org.usfirst.frc.team1065.robot.commands.Autonomous.Utility.RotateToAngle;
@@ -18,6 +19,7 @@ public class AutoCross extends CommandGroup {
     
     public  AutoCross(Obstacle obstacle) {
     	addSequential(new ResetDriveAngle());
+    	addSequential(new ForceHoodToClose(true));
     	switch(obstacle){
     		case LowBar:
     			addSequential(new DriveToDistance(0.4, 220, 15.0));
@@ -46,5 +48,7 @@ public class AutoCross extends CommandGroup {
     			addSequential(new RotateToAngle(.5, 0, 2.0));
 				break;
     	}
+    	
+    	addSequential(new ForceHoodToClose(false));
     }
 }

@@ -25,9 +25,12 @@ public class Shooter extends Subsystem {
     
     private double ratePIDPTerm, ratePIDITerm, ratePIDDTerm, ratePIDPeriod;
     private double prevCount, prevTime;
+    private boolean shooterHoodForceClose;
     
     public Shooter(){  	
     	shooterHood = new Solenoid(RobotMap.SHOOTER_HOOD_PORT);
+    	shooterHoodForceClose = false;
+    	
     	
     	shooterMotor = new VictorSP(RobotMap.SHOOTER_MOTOR_PORT);
     	shooterMotor.setInverted(true);
@@ -126,9 +129,13 @@ public class Shooter extends Subsystem {
     	return ((countDiff/timeDiff)*60.0)/360.0;
     }
     
+    public void ForceHoodClose(boolean state){
+    	shooterHoodForceClose = state;
+    }
+    
     public void set(double speed){
     	//set the hood actuator to extend if the shooter is set to spin
-    	if(speed > 0.1){
+    	if(speed > 0.1 && !shooterHoodForceClose){
     		shooterHood.set(true);
     	}
     	else{
