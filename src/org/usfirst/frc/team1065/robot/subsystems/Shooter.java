@@ -127,6 +127,14 @@ public class Shooter extends Subsystem {
     }
     
     public void set(double speed){
+    	//set the hood actuator to extend if the shooter is set to spin
+    	if(speed > 0.1){
+    		shooterHood.set(true);
+    	}
+    	else{
+    		shooterHood.set(false);
+    	}
+    	
     	//check if we should be setting the motor or the controller
     	if(shooterController.isEnabled()){
     		shooterController.setSetpoint(speed);
