@@ -27,6 +27,13 @@ public class ManualShooterControl extends Command {
     		Robot.shooter.enablePIDController();
     	}
     	
+    	if(Robot.oi.getLongDistanceSwitch()){
+    		Robot.shooter.setShooterLongDistance(true);
+    	}
+    	else{
+    		Robot.shooter.setShooterLongDistance(false);
+    	}
+    	
     	Robot.shooter.set(Robot.oi.getShooterDesiredSpeed());
     }
 

@@ -20,8 +20,8 @@ import edu.wpi.first.wpilibj.smartdashboard.SmartDashboard;
 public class Shooter extends Subsystem {
     private VictorSP shooterMotor;
     private Counter shooterCounter;
-    private PIDController shooterController;
-    private Solenoid shooterHood;
+    //private PIDController shooterController;
+    private Solenoid shooterHood, shooterTrim;
     
     private double ratePIDPTerm, ratePIDITerm, ratePIDDTerm, ratePIDPeriod;
     private double prevCount, prevTime;
@@ -33,11 +33,13 @@ public class Shooter extends Subsystem {
     
     public Shooter(){  	
     	currentSpeed = 0;
-    	controllerSetpoint = shooterController.getSetpoint();
+    	controllerSetpoint = 0;
     	controllerEnabled = false;
     	
     	shooterHood = new Solenoid(RobotMap.SHOOTER_HOOD_PORT);
     	shooterHoodForcedClose = false;
+    	
+    	shooterTrim =new Solenoid(RobotMap.SHOOTER_TRIM_PORT);
     	
     	
     	shooterMotor = new VictorSP(RobotMap.SHOOTER_MOTOR_PORT);
@@ -62,7 +64,7 @@ public class Shooter extends Subsystem {
     	//shooterCounter.setSemiPeriodMode(false);
     	shooterCounter.setDistancePerPulse((1.0/360.0) * 60.0);
     	shooterCounter.setPIDSourceType(PIDSourceType.kRate);
-    	shooterCounter.setSamplesToAverage(100);//5ms (30-120), 10ms (60-240) 
+    	shooterCounter.setSamplesToAverage(127);//5ms (30-120), 10ms (60-240) 
     	
     	
     	ratePIDPTerm = 100.0;//Making P very high so it behaves as a bang bang Controller
@@ -70,13 +72,13 @@ public class Shooter extends Subsystem {
     	ratePIDDTerm = 0.0;
     	ratePIDPeriod = 0.005;//5 ms
     	
-    	shooterController = new PIDController(ratePIDPTerm,ratePIDITerm, ratePIDDTerm, shooterCounter, shooterMotor, ratePIDPeriod);
-    	shooterController.setOutputRange(0, 1);//don't allow reverse so that we can behave as a bang bang controller
-    	shooterController.setPercentTolerance(2.5);
+    	//shooterController = new PIDController(ratePIDPTerm,ratePIDITerm, ratePIDDTerm, shooterCounter, shooterMotor, ratePIDPeriod);
+    	//shooterController.setOutputRange(0, 1);//don't allow reverse so that we can behave as a bang bang controller
+    	//shooterController.setPercentTolerance(2.5);
     	
-    	LiveWindow.addActuator("Shooter", "Motor", shooterMotor);
-    	LiveWindow.addActuator("Shooter", "PID Controller", shooterController);
-    	LiveWindow.addSensor("Shooter", "Counter", shooterCounter);
+    	//LiveWindow.addActuator("Shooter", "Motor", shooterMotor);
+    	//LiveWindow.addActuator("Shooter", "PID Controller", shooterController);
+    	//LiveWindow.addSensor("Shooter", "Counter", shooterCounter);
     }
 
     public void initDefaultCommand() {
@@ -86,20 +88,27 @@ public class Shooter extends Subsystem {
     
     public void updateStatus(){
     	currentSpeed = getSpeed();
-    	controllerSetpoint = shooterController.getSetpoint();
-    	controllerEnabled = shooterController.isEnabled();
+    	//controllerSetpoint = shooterController.getSetpoint();
+    	//controllerEnabled = shooterController.isEnabled();
+    }
+    
+    public void setShooterLongDistance(boolean value){
+    	shooterTrim.set(value);
     }
     
     public void enablePIDController(){
-    	if(!controllerEnabled){
-    		shooterController.enable();
-    	}
+    	/*if(!controllerEnabled){
+    		//shooterController.enable();
+    	}*/
+    	controllerEnabled = true;
     }
     
     public void disablePIDController(){
+    	/*
     	if(controllerEnabled){
     		shooterController.disable();
-    	}
+    	}*/
+    	controllerEnabled = false;
     }
     
     public boolean isPIDEnabled(){
@@ -155,17 +164,23 @@ public class Shooter extends Subsystem {
     	else{
     		shooterHood.set(false);
     	}
-    	
+    	controllerSetpoint = speed;
     	//check if we should be setting the motor or the controller
     	if(controllerEnabled){
-    		shooterController.setSetpoint(speed);
+    		if(currentSpeed < controllerSetpoint){
+    			shooterMotor.set(1);
+    		}
+    		else{
+    			shooterMotor.set(0);
+    		}
+    		//shooterController.setSetpoint(speed);
     	}
     	else{
     		shooterMotor.set(speed);
     	}
     	
     	//TODO: delete
-    	//SmartDashboard.putNumber("Shooter Speed", shooterCounter.getRate());
+    	SmartDashboard.putNumber("Shooter Speed", shooterCounter.getRate());
     	SmartDashboard.putNumber("Shooter Calculated Speed", currentSpeed);
     }
 }

@@ -25,9 +25,9 @@ public class AutoCrossBack extends CommandGroup {
         
         //Rotate if we are not  crossing the portcullis or seesaw because we traverse those backwards
         if(obstacle != Obstacle.LiftGate && obstacle != Obstacle.Seesaw){
-        	addSequential(new RotateToAngle(.55,180,6.0));
+        	addSequential(new RotateToAngle(.45,165,6.0));
         }
-        addSequential(new DriveToDistance(-0.5, 40, 15.0));
+        addSequential(new DriveToDistance(-0.5, 20, 15.0));
         addSequential(new AutoCross(obstacle));
     }
 }

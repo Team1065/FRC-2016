@@ -66,6 +66,10 @@ public class OI {
     	return enhancedDS.getRawButton(RobotMap.OBSTACLE_MANIPULATOR_SWITCH_PORT);
     }
     
+    public boolean getLongDistanceSwitch(){
+    	return !enhancedDS.getRawButton(RobotMap.SHOOTER_LONG_DISTANCE_SWITCH_PORT);
+    }
+    
     public double getShooterDesiredSpeed(){
     	double speed;
 		double knobValue = enhancedDS.getRawAxis(RobotMap.SHOOTER_KNOB_PORT);

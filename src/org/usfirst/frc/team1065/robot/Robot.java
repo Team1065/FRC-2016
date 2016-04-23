@@ -65,9 +65,9 @@ public class Robot extends IterativeRobot {
 					new AutoShoot(Obstacle.LowBar,TargetGoal.Low, StartingPosition.FarLeft, TargetPosition.Left),
 				},
 				{
-					new AutoCrossBack(Obstacle.Ramparts),
-					new AutoShoot(Obstacle.Seesaw,TargetGoal.High, StartingPosition.Middle, TargetPosition.Center),
-					new AutoShoot(Obstacle.Seesaw,TargetGoal.High, StartingPosition.Right, TargetPosition.Center),
+					new AutoCross(Obstacle.Ramparts),
+					new AutoShoot(Obstacle.Ramparts,TargetGoal.High, StartingPosition.Middle, TargetPosition.Center),
+					new AutoShoot(Obstacle.Ramparts,TargetGoal.High, StartingPosition.Right, TargetPosition.Center),
 				},
 				{
 					new AutoShoot(Obstacle.Ramparts,TargetGoal.None, StartingPosition.Right, TargetPosition.Right),
