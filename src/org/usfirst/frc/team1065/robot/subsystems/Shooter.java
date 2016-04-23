@@ -25,11 +25,19 @@ public class Shooter extends Subsystem {
     
     private double ratePIDPTerm, ratePIDITerm, ratePIDDTerm, ratePIDPeriod;
     private double prevCount, prevTime;
-    private boolean shooterHoodForceClose;
+    private boolean shooterHoodForcedClose;
+    
+    //status
+    private double currentSpeed,  controllerSetpoint;
+    private boolean controllerEnabled;
     
     public Shooter(){  	
+    	currentSpeed = 0;
+    	controllerSetpoint = shooterController.getSetpoint();
+    	controllerEnabled = false;
+    	
     	shooterHood = new Solenoid(RobotMap.SHOOTER_HOOD_PORT);
-    	shooterHoodForceClose = false;
+    	shooterHoodForcedClose = false;
     	
     	
     	shooterMotor = new VictorSP(RobotMap.SHOOTER_MOTOR_PORT);
@@ -76,24 +84,30 @@ public class Shooter extends Subsystem {
         setDefaultCommand(new ManualShooterControl());
     }
     
+    public void updateStatus(){
+    	currentSpeed = getSpeed();
+    	controllerSetpoint = shooterController.getSetpoint();
+    	controllerEnabled = shooterController.isEnabled();
+    }
+    
     public void enablePIDController(){
-    	if(!shooterController.isEnabled()){
+    	if(!controllerEnabled){
     		shooterController.enable();
     	}
     }
     
     public void disablePIDController(){
-    	if(shooterController.isEnabled()){
+    	if(controllerEnabled){
     		shooterController.disable();
     	}
     }
     
     public boolean isPIDEnabled(){
-    	return shooterController.isEnabled();
+    	return controllerEnabled;
     }
     
     public boolean isShooterOn(){
-    	if(Math.abs(shooterMotor.get()) > 0.1 || shooterController.getSetpoint() > 10.0){
+    	if(Math.abs(shooterMotor.get()) > 0.1 || controllerSetpoint > 10.0){
     		return true;
     	}
     	else{
@@ -102,10 +116,10 @@ public class Shooter extends Subsystem {
     }
     
     public boolean onTarget(){
-    	if(shooterController.getSetpoint() > 10.0){
-    		double rate = getSpeed();
-			if(rate > (shooterController.getSetpoint() - 250) &&
-					rate < (shooterController.getSetpoint() + 250)){
+    	if(controllerSetpoint > 10.0){
+    		double rate = currentSpeed;
+			if(rate > (controllerSetpoint - 250) &&
+					rate < (controllerSetpoint + 250)){
 				return true;
 			}
 			else{
@@ -130,12 +144,12 @@ public class Shooter extends Subsystem {
     }
     
     public void ForceHoodClose(boolean state){
-    	shooterHoodForceClose = state;
+    	shooterHoodForcedClose = state;
     }
     
     public void set(double speed){
     	//set the hood actuator to extend if the shooter is set to spin
-    	if(speed > 0.1 && !shooterHoodForceClose){
+    	if(speed > 0.1 && !shooterHoodForcedClose){
     		shooterHood.set(true);
     	}
     	else{
@@ -143,7 +157,7 @@ public class Shooter extends Subsystem {
     	}
     	
     	//check if we should be setting the motor or the controller
-    	if(shooterController.isEnabled()){
+    	if(controllerEnabled){
     		shooterController.setSetpoint(speed);
     	}
     	else{
@@ -152,7 +166,7 @@ public class Shooter extends Subsystem {
     	
     	//TODO: delete
     	//SmartDashboard.putNumber("Shooter Speed", shooterCounter.getRate());
-    	SmartDashboard.putNumber("Shooter Calculated Speed", getSpeed());
+    	SmartDashboard.putNumber("Shooter Calculated Speed", currentSpeed);
     }
 }
 

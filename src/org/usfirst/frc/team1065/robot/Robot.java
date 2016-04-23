@@ -65,9 +65,9 @@ public class Robot extends IterativeRobot {
 					new AutoShoot(Obstacle.LowBar,TargetGoal.Low, StartingPosition.FarLeft, TargetPosition.Left),
 				},
 				{
-					new AutoCross(Obstacle.Seesaw),
-					new AutoShoot(Obstacle.Seesaw,TargetGoal.None, StartingPosition.Right, TargetPosition.Right),
-					new AutoShoot(Obstacle.Seesaw,TargetGoal.None, StartingPosition.FarRight, TargetPosition.Right),
+					new AutoCross(Obstacle.Seesaw),//cross and comeback
+					new AutoShoot(Obstacle.Seesaw,TargetGoal.None, StartingPosition.Right, TargetPosition.Right),//shoot middle from middle
+					new AutoShoot(Obstacle.Seesaw,TargetGoal.None, StartingPosition.FarRight, TargetPosition.Right),//shoot middle from middle
 				},
 				{
 					new AutoShoot(Obstacle.Ramparts,TargetGoal.None, StartingPosition.Right, TargetPosition.Right),
@@ -112,6 +112,7 @@ public class Robot extends IterativeRobot {
     }
 
     public void teleopPeriodic() {
+    	shooter.updateStatus();
         Scheduler.getInstance().run();
     }
     

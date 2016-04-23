@@ -25,14 +25,13 @@ public class AutoShootDelayAndFollow extends CommandGroup {
     	addSequential(new AutoDriveToPosition(startingPosition, targetGoalPosition));
     	
     	if(targetGoal == TargetGoal.Low){
-    		addSequential(new DriveToDistance(.65, 30, 3.0));
-    		addSequential(new SetIntakeSpeed(RobotMap.INTAKE_OUT_SPEED, 2.0));
+    		addSequential(new DriveToDistance(.65, 35, 2.5));
+    		//addSequential(new SetIntakeSpeed(RobotMap.INTAKE_OUT_SPEED, 1.0));
     		addSequential(new ShootLow(6.0));
     	}
-    	else{
-    		addSequential(new DriveToDistance(.4, 12, 3.0));
-    		addSequential(new SetShooterSpeed(4600));
-    		addSequential(new DriveForTime(0, 0, 1.0));
+    	else if(targetGoal == TargetGoal.High){
+    		//addSequential(new SetShooterSpeed(5600));
+    		addSequential(new DriveForTime(0, 0, 2));
     		addSequential(new ShootHigh(5.0));
     	}
     }
