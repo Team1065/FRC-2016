@@ -20,16 +20,12 @@ public class AutoDriveToPosition extends CommandGroup {
     		    	addSequential(new DriveToDistance(.5,72,5));
     		    	break;
     		    case Left:
-    		    	addSequential(new PosDriveSignature(6,98,58,10));
     		    	break;
     		    case Middle:
-    		    	addSequential(new PosDriveSignature(-24,105,58,10));
     		    	break;
     		    case Right:
-    		    	addSequential(new PosDriveSignature(-42,129,58,10));
     		    	break;
     		    case FarRight:
-    		    	addSequential(new PosDriveSignature(-55,162,58,10));
     		    	break;
     			default:
     				break;
@@ -38,19 +34,26 @@ public class AutoDriveToPosition extends CommandGroup {
     	else if(targetPosition == TargetPosition.Center){
     		switch(startingPosition){
 		    case FarLeft:
-		    	addSequential(new PosDriveSignature(65,130,-1,10));
 		    	break;
 		    case Left:
-		    	addSequential(new PosDriveSignature(52,93,-1,10));
 		    	break;
 		    case Middle:
-		    	addSequential(new PosDriveSignature(25,65,-1,10));
+		    	addSequential(new RotateToAngle(.5, 30, 5));
+		    	addSequential(new DriveToDistance(.5,36,5));
+		    	addSequential(new RotateToAngle(.5, 0, 5));
+		    	addSequential(new DriveToDistance(.5,20,5));
+		    	addSequential(new DriveForTime(.35,.35,2));
+		    	addSequential(new DriveToDistance(-.35,36,5));
 		    	break;
 		    case Right:
-		    	addSequential(new PosDriveSignature(-20,63,0,10));
+		    	addSequential(new RotateToAngle(.5, -30, 5));
+		    	addSequential(new DriveToDistance(.5,12,5));
+		    	addSequential(new RotateToAngle(.5, 0, 5));
+		    	addSequential(new DriveToDistance(.5,20,5));
+		    	addSequential(new DriveForTime(.35,.35,2));
+		    	addSequential(new DriveToDistance(-.35,36,5));
 		    	break;
 		    case FarRight:
-		    	addSequential(new PosDriveSignature(-50,88,0,10));
 		    	break;
 			default:
 				break;
@@ -59,13 +62,10 @@ public class AutoDriveToPosition extends CommandGroup {
     	else if(targetPosition == TargetPosition.Right){
     		switch(startingPosition){
 		    case FarLeft:
-		    	addSequential(new PosDriveSignature(91,189,-1,97,-58,10));
 		    	break;
 		    case Left:
-		    	addSequential(new PosDriveSignature(58,173,-58,10));
 		    	break;
 		    case Middle:
-		    	addSequential(new PosDriveSignature(47,138,-58,10));
 		    	break;
 		    case Right:
 		    	addSequential(new RotateToAngle(.5, 60, 5));
