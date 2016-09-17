@@ -60,6 +60,7 @@ public class Shooter extends Subsystem {
     	*/
     	
     	//Quad Encoder
+    	/*
     	shooterCounter = new Counter(RobotMap.SHOOTER_ENCODER_PORT);
     	//shooterCounter.setSemiPeriodMode(false);
     	shooterCounter.setDistancePerPulse((1.0/360.0) * 60.0);
@@ -71,6 +72,20 @@ public class Shooter extends Subsystem {
     	ratePIDITerm = 0.0;
     	ratePIDDTerm = 0.0;
     	ratePIDPeriod = 0.005;//5 ms
+    	*/
+    	
+    	//Magnetic Encounter
+    	shooterCounter = new Counter(RobotMap.SHOOTER_ENCODER_PORT);
+    	//shooterCounter.setSemiPeriodMode(false);
+    	shooterCounter.setDistancePerPulse((1.0/20.0) * 60.0);
+    	shooterCounter.setPIDSourceType(PIDSourceType.kRate);
+    	shooterCounter.setSamplesToAverage(10);//5ms (30-120), 10ms (60-240) 
+    	
+    	
+    	ratePIDPTerm = 100.0;//Making P very high so it behaves as a bang bang Controller
+    	ratePIDITerm = 0.0;
+    	ratePIDDTerm = 0.0;
+    	ratePIDPeriod = 0.02;//20 ms
     	
     	//shooterController = new PIDController(ratePIDPTerm,ratePIDITerm, ratePIDDTerm, shooterCounter, shooterMotor, ratePIDPeriod);
     	//shooterController.setOutputRange(0, 1);//don't allow reverse so that we can behave as a bang bang controller
@@ -149,7 +164,7 @@ public class Shooter extends Subsystem {
     	double countDiff = count - prevCount;
     	prevCount = count;
     	
-    	return ((countDiff/timeDiff)*60.0)/360.0;
+    	return ((countDiff/timeDiff)*60.0)/20.0;
     }
     
     public void ForceHoodClose(boolean state){
@@ -167,7 +182,7 @@ public class Shooter extends Subsystem {
     	controllerSetpoint = speed;
     	//check if we should be setting the motor or the controller
     	if(controllerEnabled){
-    		if(currentSpeed < controllerSetpoint){
+    		if(currentSpeed < controllerSetpoint && !shooterHoodForcedClose){
     			shooterMotor.set(1);
     		}
     		else{

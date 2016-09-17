@@ -12,7 +12,7 @@ public class RobotMap {
     //Double Constants
     public static final double DRIVE_TOP_SPEED = 140.0,// inches per second TODO: change
 							   DRIVE_WHEEL_DIAMETER = 7.65,
-							   DRIVE_ENCODERS_COUNTS_PER_REV = 360,
+							   DRIVE_ENCODERS_COUNTS_PER_REV = 20,
 	    					   INTAKE_IN_SPEED = 0.9,
 	    					   INTAKE_OUT_SPEED = 1.0,
 	    					   JOYSTICK_DEADBAND = 0.05,

@@ -30,10 +30,6 @@ public class OI {
 	    }
 	}
     
-    public double getYAverage(){
-        return (getLeftJoystickY () + getRightJoystickY ())/2.0;
-    }
-    
     public boolean getRightJoystickTrigger(){
     	return rightJoystick.getTrigger();
     }

@@ -22,10 +22,12 @@ public class LEDControl extends Command {
     // Called repeatedly when this Command is scheduled to run
     protected void execute() {
     	boolean allLightsState = false;
+    	boolean boulderQueued = Robot.intake.getQueuingIR();
+    	boolean shooterOnTarget = Robot.shooter.onTarget();
     	
-    	if(Robot.intake.getQueuingIR()){
+    	if(boulderQueued){
     		double timeDecimal = Timer.getFPGATimestamp() % 1.0;
-    		if(Robot.shooter.onTarget()){
+    		if(shooterOnTarget){
         		allLightsState = true;
     		}
     		else if(timeDecimal < 0.25 || (timeDecimal > 0.5 && timeDecimal < 0.75) ){
@@ -38,8 +40,8 @@ public class LEDControl extends Command {
     	Robot.lighting.setRightLED(allLightsState);
     	Robot.lighting.setBackLED(allLightsState);
     	
-    	SmartDashboard.putBoolean(" Boulder in Intake", Robot.intake.getQueuingIR());
-    	SmartDashboard.putBoolean(" Shooter at Speed", Robot.shooter.onTarget());
+    	SmartDashboard.putBoolean(" Boulder in Intake", boulderQueued);
+    	SmartDashboard.putBoolean(" Shooter at Speed", shooterOnTarget);
     }
 
     // Make this return true when this Command no longer needs to run execute()

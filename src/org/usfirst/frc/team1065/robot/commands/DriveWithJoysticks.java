@@ -20,7 +20,9 @@ public class DriveWithJoysticks extends Command {
     protected void execute() {
     	double leftY = Robot.oi.getLeftJoystickY();
     	double rightY = Robot.oi.getRightJoystickY();
-    	double averageY = Robot.oi.getYAverage();
+    	
+    	/* No Drive Straight for now
+    	double averageY = (leftY + rightY)/2.0;
     	
     	double joystickDiff = Math.abs(leftY-rightY);
     	
@@ -31,7 +33,9 @@ public class DriveWithJoysticks extends Command {
         else
         {
         	Robot.drive.tankDrive(leftY, rightY);
-        }
+        }*/
+    	
+    	Robot.drive.tankDrive(leftY, rightY);
     }
 
     protected boolean isFinished() {

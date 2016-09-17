@@ -28,8 +28,14 @@ public class RotateToAngle extends Command {
     protected void execute() {
     	double currentAngle = Robot.drive.getAngle();
     	double motorSpeed = speed;
-    	//slow down 10 degrees from the target
-    	if(currentAngle > angle-10 && currentAngle < angle+10){
+    	//slow down if close to target
+    	if(currentAngle > angle-5 && currentAngle < angle+5){
+    		motorSpeed = motorSpeed * 0.75;
+    	}
+    	else if(currentAngle > angle-10 && currentAngle < angle+10){
+    		motorSpeed = motorSpeed * 0.85;
+    	}
+    	else if(currentAngle > angle-15 && currentAngle < angle+15){
     		motorSpeed = motorSpeed * 0.9;
     	}
     	
