@@ -10,6 +10,7 @@ import edu.wpi.first.wpilibj.CounterBase;
 import edu.wpi.first.wpilibj.Encoder;
 import edu.wpi.first.wpilibj.PIDController;
 import edu.wpi.first.wpilibj.PIDSourceType;
+import edu.wpi.first.wpilibj.RobotDrive;
 import edu.wpi.first.wpilibj.SPI;
 import edu.wpi.first.wpilibj.Talon;
 import edu.wpi.first.wpilibj.command.Subsystem;
@@ -20,11 +21,12 @@ import edu.wpi.first.wpilibj.smartdashboard.SmartDashboard;
  *
  */
 public class DriveTrain extends Subsystem {
-	private Talon leftTalon, rightTalon;
+	private Talon leftFrontTalon, leftBackTalon, rightFrontTalon, rightBackTalon;
     private PIDController straightPID;
 	private Encoder leftEncoder, rightEncoder;
 	private AHRS navX;
 	private DummyOutput dummyStraight;
+	private RobotDrive drive;
 	
 	private static double ratePIDPTerm, ratePIDITerm, ratePIDDTerm, straightPIDPTerm, straightPIDITerm, straightPIDDTerm, PIDPeriod;
     
@@ -36,9 +38,17 @@ public class DriveTrain extends Subsystem {
     	leftEncoder.setPIDSourceType(PIDSourceType.kRate);
     	rightEncoder.setPIDSourceType(PIDSourceType.kRate);
     	
-    	leftTalon = new Talon(RobotMap.LEFT_DRIVE_MOTOR_PORT);
-    	rightTalon = new Talon(RobotMap.RIGHT_DRIVE_MOTOR_PORT);
-    	rightTalon.setInverted(true);
+    	leftFrontTalon = new Talon(RobotMap.LEFT_FRONT_DRIVE_MOTOR_PORT);
+    	leftBackTalon = new Talon(RobotMap.LEFT_BACK_DRIVE_MOTOR_PORT);
+    	rightFrontTalon = new Talon(RobotMap.RIGHT_FRONT_DRIVE_MOTOR_PORT);
+    	rightBackTalon = new Talon(RobotMap.RIGHT_BACK_DRIVE_MOTOR_PORT);
+    	rightFrontTalon.setInverted(true);
+    	rightBackTalon.setInverted(true);
+    	
+    	drive = new RobotDrive(leftFrontTalon, leftBackTalon, rightFrontTalon, rightBackTalon);
+		drive.setInvertedMotor(RobotDrive.MotorType.kFrontRight, true);
+        drive.setInvertedMotor(RobotDrive.MotorType.kRearRight, true);
+        drive.setSafetyEnabled(false);
     	
     	straightPIDPTerm = 0.055;
     	straightPIDITerm = 0.0;
@@ -63,8 +73,8 @@ public class DriveTrain extends Subsystem {
     	straightPID.setSetpoint(0.0);
     	
     	
-    	LiveWindow.addActuator("DriveTrain","Left Motor Controller", leftTalon);
-    	LiveWindow.addActuator("DriveTrain","Right Motor Controller", rightTalon);
+    	LiveWindow.addActuator("DriveTrain","Left Front Motor Controller", leftFrontTalon);
+    	LiveWindow.addActuator("DriveTrain","Right Front Motor Controller", rightFrontTalon);
     	LiveWindow.addSensor("DriveTrain", "Left Encoder", leftEncoder);
     	LiveWindow.addSensor("DriveTrain", "Right Encoder", rightEncoder);
     	LiveWindow.addSensor("DriveTrain", "NavX", navX);
@@ -76,14 +86,20 @@ public class DriveTrain extends Subsystem {
     
     public void tankDrive(double leftSpeed, double rightSpeed){
 
-    		leftTalon.set(leftSpeed);
-        	rightTalon.set(rightSpeed);
-        	
+    	leftFrontTalon.set(leftSpeed);
+    	leftBackTalon.set(leftSpeed);
+    	rightFrontTalon.set(rightSpeed);
+    	rightBackTalon.set(rightSpeed);
+    	
     	//TODO: remove
     	//SmartDashboard.putNumber("Drive Angle", navX.getYaw());
     	//SmartDashboard.putNumber("left speed", leftEncoder.getRate());
     	//SmartDashboard.putNumber("right speed", rightEncoder.getRate());
     }
+    
+    public void mecanumDriveCartesian(double xVal, double yVal, double rotation, double gyroAngle){
+    	drive.mecanumDrive_Cartesian(xVal, yVal, rotation, gyroAngle);
+}
     
     public void DriveStraight(double speed){
     	if(straightPID.isEnabled()){

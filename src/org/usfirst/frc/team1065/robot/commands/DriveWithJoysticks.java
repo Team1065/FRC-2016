@@ -20,6 +20,7 @@ public class DriveWithJoysticks extends Command {
     protected void execute() {
     	double leftY = Robot.oi.getLeftJoystickY();
     	double rightY = Robot.oi.getRightJoystickY();
+    	double rightX = Robot.oi.getRightJoystickX();
     	
     	/* No Drive Straight for now
     	double averageY = (leftY + rightY)/2.0;
@@ -35,7 +36,15 @@ public class DriveWithJoysticks extends Command {
         	Robot.drive.tankDrive(leftY, rightY);
         }*/
     	
-    	Robot.drive.tankDrive(leftY, rightY);
+    	if(Robot.oi.getLeftJoystickTop())
+    	{
+    		Robot.drive.mecanumDriveCartesian(rightX, -rightY, leftY,0);
+    	}
+    	else
+    	{
+    		Robot.drive.tankDrive(leftY, rightY);
+    	}
+    	
     }
 
     protected boolean isFinished() {

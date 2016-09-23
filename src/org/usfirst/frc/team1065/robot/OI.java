@@ -29,6 +29,14 @@ public class OI {
 	    	return -rightJoystick.getY();
 	    }
 	}
+	public double getRightJoystickX () {
+		if(Math.abs(rightJoystick.getX()) < RobotMap.JOYSTICK_DEADBAND){
+			return 0;
+		}
+	    else {
+	    	return rightJoystick.getX();
+	    }
+	}
     
     public boolean getRightJoystickTrigger(){
     	return rightJoystick.getTrigger();
@@ -36,6 +44,10 @@ public class OI {
     
     public boolean getRightJoystickTop(){
     	return rightJoystick.getTop();
+    }
+    
+    public boolean getLeftJoystickTop(){
+    	return leftJoystick.getTop();
     }
     
     public boolean getLeftJoystickTrigger(){

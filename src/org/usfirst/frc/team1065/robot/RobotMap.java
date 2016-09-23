@@ -38,11 +38,13 @@ public class RobotMap {
     						   SHOOTER_VOLT_5 = 1.0;
     
     //PWM Ports
-    public static final int LEFT_DRIVE_MOTOR_PORT = 0,
-    				  	    RIGHT_DRIVE_MOTOR_PORT = 1,
+    public static final int LEFT_FRONT_DRIVE_MOTOR_PORT = 0,
+    				  	    RIGHT_FRONT_DRIVE_MOTOR_PORT = 1,
 				  	    	INTAKE_MOTOR_PORT = 2,
 				  	    	QUEUING_MOTOR_PORT = 3,
-				  	    	SHOOTER_MOTOR_PORT = 4;
+				  	    	SHOOTER_MOTOR_PORT = 4,
+		  	    			LEFT_BACK_DRIVE_MOTOR_PORT = 5,
+    				  	    RIGHT_BACK_DRIVE_MOTOR_PORT = 6;
     //PCM Ports
     public static final int OBSTACLE_MANIPULATOR_PORT = 0,
 	  	    				SHOOTER_HOOD_PORT = 1,
