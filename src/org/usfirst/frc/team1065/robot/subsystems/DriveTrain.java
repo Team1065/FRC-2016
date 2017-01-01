@@ -99,7 +99,7 @@ public class DriveTrain extends Subsystem {
     
     public void mecanumDriveCartesian(double xVal, double yVal, double rotation, double gyroAngle){
     	drive.mecanumDrive_Cartesian(xVal, yVal, rotation, gyroAngle);
-}
+    }
     
     public void DriveStraight(double speed){
     	if(straightPID.isEnabled()){

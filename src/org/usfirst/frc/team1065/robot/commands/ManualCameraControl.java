@@ -18,11 +18,12 @@ public class ManualCameraControl extends Command {
     }
 
 	protected void execute() {
-		 boolean leftTrig = Robot.oi.getLeftJoystickTrigger();
+		//Only using one camera
+		 /*boolean leftTrig = Robot.oi.getLeftJoystickTrigger();
 		 
 		 if(leftTrig){
 			 Robot.camera.switchCamera(); 
-		 }
+		 }*/
 		 
 		 Robot.camera.sendImageToDS();
 	}

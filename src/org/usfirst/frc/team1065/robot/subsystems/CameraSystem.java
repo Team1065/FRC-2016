@@ -26,13 +26,30 @@ public class CameraSystem extends Subsystem{
     	frame = NIVision.imaqCreateImage(NIVision.ImageType.IMAGE_RGB, 0);
     	try{
     		sessionfront = NIVision.IMAQdxOpenCamera(RobotMap.FRONT_CAM, NIVision.IMAQdxCameraControlMode.CameraControlModeController);
-        	sessionback = NIVision.IMAQdxOpenCamera(RobotMap.BACK_CAM, NIVision.IMAQdxCameraControlMode.CameraControlModeController);
+        	
         	currSession = sessionfront;
         	NIVision.IMAQdxConfigureGrab(currSession);
     	}
     	catch(Exception e){
     		System.out.print("camera exception!!!!");
+    		try{
+    			sessionfront = NIVision.IMAQdxOpenCamera(RobotMap.BACK_CAM, NIVision.IMAQdxCameraControlMode.CameraControlModeController);
+            	
+            	currSession = sessionfront;
+            	NIVision.IMAQdxConfigureGrab(currSession);
+        	}
+        	catch(Exception e1){
+        		System.out.print("camera exception!!!!");
+        	}
     	}
+    	
+    	try{
+    		sessionback = NIVision.IMAQdxOpenCamera(RobotMap.BACK_CAM, NIVision.IMAQdxCameraControlMode.CameraControlModeController);
+    	}
+    	catch(Exception e){
+    		System.out.print("camera exception!!!!");
+    	}
+    	
     }
     
 	protected void initDefaultCommand() {
